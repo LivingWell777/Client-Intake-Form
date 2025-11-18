@@ -31,7 +31,12 @@
       box-shadow: 0 6px 20px rgba(0,0,0,0.06);
     }
     .header {text-align:center;margin-bottom:18px}
-    .header img{width:160px;height:auto;margin-bottom:8px}
+    .header img{
+      width:100%;
+      height:auto;
+      margin-bottom:8px;
+      display:block;
+    }
     h1{color:var(--accent);margin:0 0 6px;font-size:22px}
     p.intro{font-size:15px;line-height:1.6;margin:8px 0 18px}
     fieldset{
@@ -66,71 +71,70 @@
       <p class="note">LivingWell Brussels – Chaussée d'Etterbeek 64, 1040 Bruxelles – contact@livingwell.be</p>
     </div>
 
-    <p class="intro">As a non-profit holistic wellness centre, we are committed to supporting your health in a safe, respectful, and transparent way. Please complete this form carefully before your first appointment.</p>
+    <!-- UPDATED INTRO TEXT -->
+    <p class="intro">
+      LivingWell is a non-profit holistic wellness centre dedicated to providing safe, respectful, and inclusive care.
+      The information you share helps us tailor sessions to your needs and ensure your well-being.
+      Please complete this form before your first appointment.
+    </p>
 
     <p id="confirmation" role="status" aria-live="polite">Thank you! Your form has been successfully submitted.</p>
 
-    <!--
-      IMPORTANT:
-      This front-end is wired to the Google Apps Script Web App URL below.
-      The script will attempt an AJAX (fetch) POST and parse the JSON response returned by the Apps Script doPost handler.
-      If fetch is blocked due to CORS, the script automatically falls back to a traditional form POST into a hidden iframe (no page navigation).
-    -->
     <form id="clientForm" action="https://script.google.com/macros/s/AKfycbzkq-pAuTJ-Ayc8N1EN2fMvXKTWUAZZER-Fead9SlmU7akQ-sB_28UqkbATBBBa6VjL/exec" method="POST" novalidate>
+
       <!-- 1. Personal Information -->
       <fieldset>
         <legend>1. Personal Information</legend>
 
         <div class="form-row">
           <div class="two">
-            <label for="full_name">Full name <span class="error" aria-hidden="true">*</span></label>
-            <input id="full_name" name="full_name" type="text" required aria-required="true" autocomplete="name" placeholder="First Last">
+            <label for="full_name">Full name <span class="error">*</span></label>
+            <input id="full_name" name="full_name" type="text" required autocomplete="name" placeholder="First Last">
           </div>
 
           <div class="small">
-            <label for="dob">Date of birth <span class="error" aria-hidden="true">*</span></label>
-            <input id="dob" name="dob" type="date" required aria-required="true" max=""> 
+            <label for="dob">Date of birth <span class="error">*</span></label>
+            <input id="dob" name="dob" type="date" required max="">
           </div>
         </div>
 
         <label for="address">Address</label>
-        <input id="address" name="address" type="text" autocomplete="street-address">
+        <input id="address" name="address" type="text">
 
         <div class="form-row">
           <div class="three">
             <label for="postal_code">Postal code</label>
-            <input id="postal_code" name="postal_code" type="text" inputmode="numeric" pattern="[A-Za-z0-9\s\-]{2,10}" placeholder="1000">
+            <input id="postal_code" name="postal_code" type="text" pattern="[A-Za-z0-9\s\-]{2,10}">
           </div>
+
           <div class="three">
             <label for="city">City</label>
-            <input id="city" name="city" type="text" autocomplete="address-level2">
+            <input id="city" name="city" type="text">
           </div>
+
           <div class="three">
             <label for="phone">Phone number</label>
-            <input id="phone" name="phone" type="tel" placeholder="+32 123 456 789" pattern="^\+?[0-9\-\s]{6,20}$" inputmode="tel" autocomplete="tel">
+            <input id="phone" name="phone" type="tel" placeholder="+32 123 456 789">
           </div>
         </div>
 
         <label for="email">Email address</label>
-        <input id="email" name="email" type="email" placeholder="name@example.com" autocomplete="email">
+        <input id="email" name="email" type="email" placeholder="name@example.com">
 
         <label>Preferred contact method (select all that apply)</label>
-        <div class="checkbox-group" role="group" aria-labelledby="contact-methods"> 
+        <div class="checkbox-group">
           <label class="inline"><input type="checkbox" name="contact_method" value="Email"> Email</label>
           <label class="inline"><input type="checkbox" name="contact_method" value="Phone"> Phone</label>
           <label class="inline"><input type="checkbox" name="contact_method" value="SMS"> SMS</label>
         </div>
-
-        <label for="emergency_contact">Emergency contact (name & phone)</label>
-        <input id="emergency_contact" name="emergency_contact" type="text" autocomplete="off" placeholder="Jane Doe, +32 123 456 789">
       </fieldset>
 
       <!-- 2. Health Information -->
       <fieldset>
         <legend>2. Health Information</legend>
 
-        <label>Recent injuries, surgeries, or treatments</label>
-        <div role="radiogroup" aria-required="true" aria-label="Recent injuries">
+        <label>Have you had any recent injuries, surgeries, or medical treatments we should be aware of?</label>
+        <div role="radiogroup">
           <label class="inline"><input type="radio" name="recent_injuries" value="Yes"> Yes</label>
           <label class="inline"><input type="radio" name="recent_injuries" value="No" checked> No</label>
         </div>
@@ -138,21 +142,33 @@
         <label for="injury_details">If yes, please specify</label>
         <input id="injury_details" name="injury_details" type="text">
 
-        <label>Conditions (check all that apply)</label>
-        <div class="checkbox-group" role="group" aria-label="Health conditions"> 
-          <label class="inline"><input type="checkbox" name="conditions" value="High/Low Blood Pressure"> High/Low Blood Pressure</label>
-          <label class="inline"><input type="checkbox" name="conditions" value="Heart Condition"> Heart Condition</label>
+        <label>Health conditions (check all that apply)</label>
+        <div class="checkbox-group">
+          <label class="inline"><input type="checkbox" name="conditions" value="Blood pressure concerns"> Blood pressure concerns (high or low)</label>
+          <label class="inline"><input type="checkbox" name="conditions" value="Heart-related conditions"> Heart-related conditions</label>
           <label class="inline"><input type="checkbox" name="conditions" value="Diabetes"> Diabetes</label>
-          <label class="inline"><input type="checkbox" name="conditions" value="Skin Conditions"> Skin Conditions</label>
-          <label class="inline"><input type="checkbox" name="conditions" value="Circulatory Problems"> Circulatory Problems</label>
-          <label class="inline"><input type="checkbox" name="conditions" value="Arthritis"> Arthritis</label>
-          <label class="inline">Pregnancy: <input type="checkbox" name="conditions" value="Pregnancy"><input name="trimester" type="text" placeholder="trimester" style="width:72px;margin-left:8px"></label>
-          <label class="inline">Allergies: <input type="checkbox" name="conditions" value="Allergies"><input id="allergies" name="allergies" type="text" placeholder="e.g. oils, nuts" style="width:160px;margin-left:8px"></label>
-          <label class="inline">Other: <input type="checkbox" name="conditions" value="Other"><input id="other_conditions" name="other_conditions" type="text" placeholder="specify" style="width:140px;margin-left:8px"></label>
+          <label class="inline"><input type="checkbox" name="conditions" value="Skin sensitivities"> Skin sensitivities or conditions</label>
+          <label class="inline"><input type="checkbox" name="conditions" value="Circulation concerns"> Circulation concerns</label>
+          <label class="inline"><input type="checkbox" name="conditions" value="Arthritis or joint issues"> Arthritis or joint issues</label>
+
+          <label>Pregnancy (if applicable):</label>
+          <label class="inline"><input type="checkbox" name="conditions" value="Pregnancy">
+            <input name="trimester" type="text" placeholder="trimester" style="width:72px;margin-left:8px">
+          </label>
+
+          <label>Allergies:</label>
+          <label class="inline"><input type="checkbox" name="conditions" value="Allergies">
+            <input id="allergies" name="allergies" type="text" placeholder="e.g. oils, nuts" style="width:160px;margin-left:8px">
+          </label>
+
+          <label class="inline">Other:
+            <input type="checkbox" name="conditions" value="Other">
+            <input id="other_conditions" name="other_conditions" type="text" placeholder="specify" style="width:140px;margin-left:8px">
+          </label>
         </div>
 
-        <label>Current medications</label>
-        <div role="radiogroup" aria-label="Current medications"> 
+        <label>Are you currently taking any medications or supplements?</label>
+        <div role="radiogroup">
           <label class="inline"><input type="radio" name="medications" value="Yes"> Yes</label>
           <label class="inline"><input type="radio" name="medications" value="No" checked> No</label>
         </div>
@@ -160,8 +176,8 @@
         <label for="medications_details">If yes, please specify</label>
         <input id="medications_details" name="medications_details" type="text">
 
-        <label>Previous massage experience</label>
-        <div role="radiogroup" aria-label="Previous massage experience"> 
+        <label>Have you received professional massage/bodywork before?</label>
+        <div role="radiogroup">
           <label class="inline"><input type="radio" name="massage_experience" value="Yes"> Yes</label>
           <label class="inline"><input type="radio" name="massage_experience" value="No" checked> No</label>
         </div>
@@ -170,51 +186,63 @@
       <!-- 3. Service Selection -->
       <fieldset>
         <legend>3. Service Selection</legend>
-        <div class="checkbox-group" role="group" aria-label="Services"> 
-          <label class="inline"><input type="checkbox" name="service" value="Relaxation Massage"> Relaxation Massage</label>
-          <label class="inline"><input type="checkbox" name="service" value="Therapeutic Massage"> Deep Tissue / Therapeutic Massage</label>
-          <label class="inline"><input type="checkbox" name="service" value="Cooking Demo"> Plant-Based Cooking Demo</label>
-          <label class="inline"><input type="checkbox" name="service" value="Workshop"> Health Seminar / Workshop</label>
-          <label class="inline">Other: <input name="other_service" type="text" placeholder="specify" style="width:160px;margin-left:8px"></label>
+        <div class="checkbox-group">
+          <label class="inline"><input type="checkbox" name="service" value="Localised Chair Massage"> Localised Chair Massage</label>
+          <label class="inline"><input type="checkbox" name="service" value="Localised Massage with Oils"> Localised Massage with Oils</label>
+          <label class="inline"><input type="checkbox" name="service" value="Aromatherapy Massage"> Aromatherapy Massage</label>
+          <label class="inline"><input type="checkbox" name="service" value="Maderotherapy Massage"> Maderotherapy Massage</label>
+          <label class="inline"><input type="checkbox" name="service" value="Free 10-minute Quick Relief Massage"> Free 10-minute Quick Relief Massage</label>
         </div>
       </fieldset>
 
-      <!-- 4. Consent & Acknowledgement -->
+      <!-- 4. Consent -->
       <fieldset>
         <legend>4. Consent & Acknowledgement</legend>
         <p class="note">
           <strong>Nature of Service:</strong> I understand services are non-medical and complementary.<br>
-          <strong>Health Disclosure:</strong> I confirm my information is accurate and will notify practitioners of any changes.<br>
-          <strong>Privacy & GDPR:</strong> Data stored securely for 7 years, only used for service provision. Requests for access, correction, or deletion can be sent to <a href="mailto:contact@livingwell.be">contact@livingwell.be</a>.<br>
+          <strong>Health Disclosure:</strong> I confirm my information is accurate and will notify practitioners of changes.<br>
+          <strong>Privacy & GDPR:</strong> Data stored securely for 7 years. Requests for access, correction, or deletion can be sent to contact@livingwell.be.<br>
           <strong>Touch Consent:</strong> I understand massage involves physical touch.<br>
-          <strong>House Rules:</strong> Arrive on time, silence mobile, respect staff and clients, 24h cancellation notice. Inappropriate behavior may lead to termination of service.<br>
           <strong>Liability Waiver:</strong> LivingWell is not responsible for adverse reactions if information is incomplete.
         </p>
 
         <label class="inline">
-          <input type="checkbox" id="gdpr_consent" name="gdpr_consent" required aria-required="true">
-          I consent to the processing of my personal data in accordance with the privacy policy. <span class="error" aria-hidden="true">*</span>
+          <input type="checkbox" id="gdpr_consent" name="gdpr_consent" required>
+          I consent to the processing of my personal data in accordance with the privacy policy. <span class="error">*</span>
         </label>
       </fieldset>
 
-      <!-- 5. Signature -->
+      <!-- 5. House Rules -->
       <fieldset>
-        <legend>5. Signature</legend>
-
-        <label for="client_name">Client name</label>
-        <input id="client_name" name="client_name" type="text" autocomplete="name">
-
-        <label for="signature_date">Date</label>
-        <input id="signature_date" name="signature_date" type="date" max=""> 
-
-        <label for="practitioner_name">Practitioner name</label>
-        <input id="practitioner_name" name="practitioner_name" type="text" autocomplete="off">
+        <legend>5. House Rules</legend>
+        <p class="note">
+          1. <strong>Purpose of Services:</strong> All services are non-medical.<br>
+          2. <strong>Registration & Identification:</strong> Clients must register; ID may be required.<br>
+          3. <strong>Personal Belongings:</strong> LivingWell is not responsible for lost items.<br>
+          4. <strong>Hygiene:</strong> Shower before treatments; avoid lotions and oils beforehand.<br>
+          5. <strong>Smoking/Vaping:</strong> Not permitted on premises.<br>
+          6. <strong>Alcohol/Substances:</strong> Not allowed before or during treatments.<br>
+          7. <strong>Health Conditions:</strong> Consult a doctor if needed; LivingWell may refuse service.<br>
+          8. <strong>Behavior:</strong> Respectful conduct required; inappropriate behaviour ends session without refund.<br>
+          9. <strong>Liability:</strong> LivingWell is not liable for accidents on premises.<br>
+          10. <strong>Photography:</strong> Recording not allowed during treatments.<br>
+          11. <strong>Cancellations:</strong> Cancel ≥24h before; late arrival reduces session time.<br>
+          12. <strong>Payment:</strong> Due at service or within 5 business days.<br>
+          13. <strong>Safety:</strong> Notify therapist of discomfort immediately.<br>
+          14. <strong>Governing Law:</strong> Belgian law applies; Brussels courts have jurisdiction.
+        </p>
       </fieldset>
 
-      <!-- 6. Marketing Consent -->
+      <!-- 6. Signature & Marketing -->
       <fieldset>
-        <legend>6. Marketing Consent</legend>
-        <div role="radiogroup" aria-label="Marketing consent"> 
+        <legend>6. Signature & Marketing Consent</legend>
+        <label for="signature">Signature</label>
+        <input id="signature" name="signature" type="text" placeholder="Sign here">
+
+        <label for="signature_date">Date</label>
+        <input id="signature_date" name="signature_date" type="date" max="">
+
+        <div role="radiogroup">
           <label class="inline"><input type="radio" name="marketing" value="Agree"> I agree to receive LivingWell updates</label>
           <label class="inline"><input type="radio" name="marketing" value="Disagree" checked> I do not wish to receive marketing communications</label>
         </div>
@@ -222,7 +250,7 @@
 
       <div style="display:flex;gap:12px;align-items:center">
         <button type="submit" id="submitBtn" class="submit-btn">Submit</button>
-        <div id="formError" class="error" role="alert" aria-live="assertive" style="display:none"></div>
+        <div id="formError" class="error" role="alert" style="display:none"></div>
       </div>
     </form>
 
@@ -234,7 +262,6 @@
 
   <script>
     (function(){
-      // Your deployed Google Apps Script web app URL:
       const WEB_APP_URL = 'https://script.google.com/macros/s/AKfycbzkq-pAuTJ-Ayc8N1EN2fMvXKTWUAZZER-Fead9SlmU7akQ-sB_28UqkbATBBBa6VjL/exec';
 
       const form = document.getElementById('clientForm');
@@ -242,120 +269,82 @@
       const confirmation = document.getElementById('confirmation');
       const formError = document.getElementById('formError');
 
-      // ensure date inputs max = today
       const today = new Date().toISOString().split('T')[0];
       document.querySelectorAll('input[type="date"]').forEach(inp => inp.max = today);
 
-      // set form.action to the web app URL (so non-JS POSTs work)
-      if (WEB_APP_URL) form.action = WEB_APP_URL;
-
-      function showError(message) {
-        formError.textContent = message;
-        formError.style.display = message ? 'block' : 'none';
+      function showError(msg){
+        formError.textContent = msg;
+        formError.style.display = msg ? 'block' : 'none';
       }
 
       function customValidate(){
         const gdpr = document.getElementById('gdpr_consent');
         if(!gdpr.checked){
-          showError('You must consent to processing of personal data to submit this form.');
-          gdpr.focus();
+          showError('You must consent to the processing of personal data.');
           return false;
         }
-        const methods = Array.from(document.querySelectorAll('input[name="contact_method"]'));
+        const methods = [...document.querySelectorAll('input[name="contact_method"]')];
         if(!methods.some(c => c.checked)){
-          showError('Please select at least one preferred contact method (Email, Phone or SMS).');
-          methods[0].focus();
+          showError('Please select at least one preferred contact method.');
           return false;
         }
         showError('');
         return true;
       }
 
-      // Create a hidden iframe for fallback traditional form POST (avoids CORS)
-      function ensureHiddenIframe() {
+      function ensureIframe(){
         let iframe = document.getElementById('submission_iframe');
-        if (!iframe) {
+        if(!iframe){
           iframe = document.createElement('iframe');
           iframe.style.display = 'none';
-          iframe.name = 'submission_iframe';
           iframe.id = 'submission_iframe';
+          iframe.name = 'submission_iframe';
           document.body.appendChild(iframe);
         }
         return iframe;
       }
 
-      // Fallback: submit the form into a hidden iframe (bypasses CORS restrictions)
-      function submitViaIframe() {
-        try {
-          ensureHiddenIframe();
-          form.target = 'submission_iframe';
-          form.submit();
-          // Show a success-ish message; note: Apps Script response is not visible here
-          confirmation.style.display = 'block';
-          confirmation.textContent = 'Form submitted (via fallback).';
-          form.reset();
-          setTimeout(()=> confirmation.style.display = 'none', 8000);
-        } catch (err) {
-          showError('Fallback submission failed: ' + (err && err.message ? err.message : err));
-        } finally {
-          form.removeAttribute('target');
-        }
+      function fallbackSubmit(){
+        ensureIframe();
+        form.target = 'submission_iframe';
+        form.submit();
+        confirmation.style.display = 'block';
+        confirmation.textContent = 'Form submitted (fallback mode).';
+        form.reset();
+        setTimeout(()=> confirmation.style.display='none',8000);
+        form.removeAttribute('target');
       }
 
       form.addEventListener('submit', function(e){
         e.preventDefault();
-
-        if (!form.checkValidity()){
-          form.reportValidity();
-          return;
-        }
-        if (!customValidate()) return;
-
-        if (!WEB_APP_URL) {
-          showError('No Google Apps Script web app URL configured.');
-          return;
-        }
-
-        const formData = new FormData(form);
+        if(!form.checkValidity()){form.reportValidity();return;}
+        if(!customValidate()) return;
 
         submitBtn.disabled = true;
         submitBtn.textContent = 'Sending…';
 
-        fetch(WEB_APP_URL, {
-          method: 'POST',
-          body: formData,
-          mode: 'cors',
-          credentials: 'omit'
+        const formData = new FormData(form);
+
+        fetch(WEB_APP_URL,{method:'POST',body:formData})
+        .then(res => {
+          if(!res.ok) throw new Error('Server error');
+          const ct=res.headers.get('content-type')||'';
+          return ct.includes('json') ? res.json() : {status:'success'};
         })
-        .then(response => {
-          const ct = response.headers.get('Content-Type') || '';
-          if (!response.ok) {
-            return response.text().then(txt => { throw new Error(txt || response.statusText || 'Server error'); });
-          }
-          if (ct.indexOf('application/json') !== -1) {
-            return response.json();
-          } else {
-            return { status: 'success' };
-          }
-        })
-        .then(json => {
-          if (json && json.status === 'success') {
-            confirmation.style.display = 'block';
-            confirmation.textContent = 'Thank you — your form was submitted.';
+        .then(json=>{
+          if(json.status==='success'){
+            confirmation.style.display='block';
+            confirmation.textContent='Thank you — your form was submitted.';
             form.reset();
-            setTimeout(()=> confirmation.style.display = 'none', 8000);
+            setTimeout(()=>confirmation.style.display='none',8000);
           } else {
-            const msg = (json && json.message) ? json.message : 'Unexpected server response';
-            throw new Error(msg);
+            throw new Error(json.message||'Unexpected response');
           }
         })
-        .catch(err => {
-          console.warn('AJAX submit failed; falling back to iframe POST. Error:', err && err.message ? err.message : err);
-          submitViaIframe();
-        })
-        .finally(() => {
-          submitBtn.disabled = false;
-          submitBtn.textContent = 'Submit';
+        .catch(()=> fallbackSubmit())
+        .finally(()=>{
+          submitBtn.disabled=false;
+          submitBtn.textContent='Submit';
         });
       });
     })();
