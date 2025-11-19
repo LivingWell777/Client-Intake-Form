@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!DOCTYPE html> 
 <html lang="en">
 <head>
   <meta charset="utf-8" />
@@ -71,7 +71,6 @@
       <p class="note">LivingWell Brussels – Chaussée d'Etterbeek 64, 1040 Bruxelles – contact@livingwell.be</p>
     </div>
 
-    <!-- UPDATED INTRO TEXT -->
     <p class="intro">
       LivingWell is a non-profit holistic wellness centre dedicated to providing safe, respectful, and inclusive care.
       The information you share helps us tailor sessions to your needs and ensure your well-being.
@@ -85,13 +84,11 @@
       <!-- 1. Personal Information -->
       <fieldset>
         <legend>1. Personal Information</legend>
-
         <div class="form-row">
           <div class="two">
             <label for="full_name">Full name <span class="error">*</span></label>
             <input id="full_name" name="full_name" type="text" required autocomplete="name" placeholder="First Last">
           </div>
-
           <div class="small">
             <label for="dob">Date of birth <span class="error">*</span></label>
             <input id="dob" name="dob" type="date" required max="">
@@ -106,12 +103,10 @@
             <label for="postal_code">Postal code</label>
             <input id="postal_code" name="postal_code" type="text" pattern="[A-Za-z0-9\s\-]{2,10}">
           </div>
-
           <div class="three">
             <label for="city">City</label>
             <input id="city" name="city" type="text">
           </div>
-
           <div class="three">
             <label for="phone">Phone number</label>
             <input id="phone" name="phone" type="tel" placeholder="+32 123 456 789">
@@ -129,63 +124,9 @@
         </div>
       </fieldset>
 
-      <!-- 2. Health Information -->
+      <!-- 2. Service Selection -->
       <fieldset>
-        <legend>2. Health Information</legend>
-
-        <label>Have you had any recent injuries, surgeries, or medical treatments we should be aware of?</label>
-        <div role="radiogroup">
-          <label class="inline"><input type="radio" name="recent_injuries" value="Yes"> Yes</label>
-          <label class="inline"><input type="radio" name="recent_injuries" value="No" checked> No</label>
-        </div>
-
-        <label for="injury_details">If yes, please specify</label>
-        <input id="injury_details" name="injury_details" type="text">
-
-        <label>Health conditions (check all that apply)</label>
-        <div class="checkbox-group">
-          <label class="inline"><input type="checkbox" name="conditions" value="Blood pressure concerns"> Blood pressure concerns (high or low)</label>
-          <label class="inline"><input type="checkbox" name="conditions" value="Heart-related conditions"> Heart-related conditions</label>
-          <label class="inline"><input type="checkbox" name="conditions" value="Diabetes"> Diabetes</label>
-          <label class="inline"><input type="checkbox" name="conditions" value="Skin sensitivities"> Skin sensitivities or conditions</label>
-          <label class="inline"><input type="checkbox" name="conditions" value="Circulation concerns"> Circulation concerns</label>
-          <label class="inline"><input type="checkbox" name="conditions" value="Arthritis or joint issues"> Arthritis or joint issues</label>
-
-          <label>Pregnancy (if applicable):</label>
-          <label class="inline"><input type="checkbox" name="conditions" value="Pregnancy">
-            <input name="trimester" type="text" placeholder="trimester" style="width:72px;margin-left:8px">
-          </label>
-
-          <label>Allergies:</label>
-          <label class="inline"><input type="checkbox" name="conditions" value="Allergies">
-            <input id="allergies" name="allergies" type="text" placeholder="e.g. oils, nuts" style="width:160px;margin-left:8px">
-          </label>
-
-          <label class="inline">Other:
-            <input type="checkbox" name="conditions" value="Other">
-            <input id="other_conditions" name="other_conditions" type="text" placeholder="specify" style="width:140px;margin-left:8px">
-          </label>
-        </div>
-
-        <label>Are you currently taking any medications or supplements?</label>
-        <div role="radiogroup">
-          <label class="inline"><input type="radio" name="medications" value="Yes"> Yes</label>
-          <label class="inline"><input type="radio" name="medications" value="No" checked> No</label>
-        </div>
-
-        <label for="medications_details">If yes, please specify</label>
-        <input id="medications_details" name="medications_details" type="text">
-
-        <label>Have you received professional massage/bodywork before?</label>
-        <div role="radiogroup">
-          <label class="inline"><input type="radio" name="massage_experience" value="Yes"> Yes</label>
-          <label class="inline"><input type="radio" name="massage_experience" value="No" checked> No</label>
-        </div>
-      </fieldset>
-
-      <!-- 3. Service Selection -->
-      <fieldset>
-        <legend>3. Service Selection</legend>
+        <legend>2. Service Selection</legend>
         <div class="checkbox-group">
           <label class="inline"><input type="checkbox" name="service" value="Localised Chair Massage"> Localised Chair Massage</label>
           <label class="inline"><input type="checkbox" name="service" value="Localised Massage with Oils"> Localised Massage with Oils</label>
@@ -195,47 +136,43 @@
         </div>
       </fieldset>
 
-      <!-- 4. Consent -->
+      <!-- 3. Consent -->
       <fieldset>
-        <legend>4. Consent & Acknowledgement</legend>
+        <legend>3. Consent & Acknowledgement</legend>
         <p class="note">
           <strong>Nature of Service:</strong> I understand services are non-medical and complementary.<br>
-          <strong>Health Disclosure:</strong> I confirm my information is accurate and will notify practitioners of changes.<br>
           <strong>Privacy & GDPR:</strong> Data stored securely for 7 years. Requests for access, correction, or deletion can be sent to contact@livingwell.be.<br>
           <strong>Touch Consent:</strong> I understand massage involves physical touch.<br>
           <strong>Liability Waiver:</strong> LivingWell is not responsible for adverse reactions if information is incomplete.
         </p>
-
         <label class="inline">
           <input type="checkbox" id="gdpr_consent" name="gdpr_consent" required>
           I consent to the processing of my personal data in accordance with the privacy policy. <span class="error">*</span>
         </label>
       </fieldset>
 
-      <!-- 5. House Rules -->
+      <!-- 4. House Rules -->
       <fieldset>
-        <legend>5. House Rules</legend>
+        <legend>4. House Rules</legend>
         <p class="note">
           1. <strong>Purpose of Services:</strong> All services are non-medical.<br>
-          2. <strong>Registration & Identification:</strong> Clients must register; ID may be required.<br>
-          3. <strong>Personal Belongings:</strong> LivingWell is not responsible for lost items.<br>
-          4. <strong>Hygiene:</strong> Shower before treatments; avoid lotions and oils beforehand.<br>
-          5. <strong>Smoking/Vaping:</strong> Not permitted on premises.<br>
-          6. <strong>Alcohol/Substances:</strong> Not allowed before or during treatments.<br>
-          7. <strong>Health Conditions:</strong> Consult a doctor if needed; LivingWell may refuse service.<br>
-          8. <strong>Behavior:</strong> Respectful conduct required; inappropriate behaviour ends session without refund.<br>
-          9. <strong>Liability:</strong> LivingWell is not liable for accidents on premises.<br>
-          10. <strong>Photography:</strong> Recording not allowed during treatments.<br>
-          11. <strong>Cancellations:</strong> Cancel ≥24h before; late arrival reduces session time.<br>
-          12. <strong>Payment:</strong> Due at service or within 5 business days.<br>
-          13. <strong>Safety:</strong> Notify therapist of discomfort immediately.<br>
-          14. <strong>Governing Law:</strong> Belgian law applies; Brussels courts have jurisdiction.
+          2. <strong>Registration & Identification:</strong> Clients must register upon arrival. Presenting a valid ID may be required.<br>
+          5. <strong>Smoking/Vaping:</strong> Strictly prohibited within the premises.<br>
+          6. <strong>Alcohol/Substances:</strong> Consumption of alcohol or substances that may impair judgement is not permitted before or during treatments. We reserve the right to deny access to the centre and to services if the client is under the influence.<br>
+          7. <strong>Health Conditions:</strong> Notify the therapist of any and all health related conditions that are relevant before receiving your massage.<br>
+          8. <strong>Behavior:</strong> Respectful behavior is expected at all times. Aggressive or inappropriate conduct may result in immediate termination of services without refund and denial of access to our premises.<br>
+          9. <strong>Liability:</strong> LivingWell is not liable for accidents or injuries that occur on the premises.<br>
+          10. <strong>Photography:</strong> Photography and recording are not permitted during treatments to ensure privacy.<br>
+          11. <strong>Cancellations:</strong> Cancel at least 24 hours in advance. Late arrivals may reduce session length without refund.<br>
+          12. <strong>Payment:</strong> Payment is due in advance or latest at the time of service as a general rule. Accepted methods include cash and electronic payment.<br>
+          13. <strong>Safety:</strong> Notify the therapist immediately of any discomfort.<br>
+          14. <strong>Governing Law:</strong> This agreement is governed by Belgian law. The courts of Brussels have exclusive jurisdiction.
         </p>
       </fieldset>
 
-      <!-- 6. Signature & Marketing -->
+      <!-- 5. Signature & Marketing -->
       <fieldset>
-        <legend>6. Signature & Marketing Consent</legend>
+        <legend>5. Signature & Marketing Consent</legend>
         <label for="signature">Signature</label>
         <input id="signature" name="signature" type="text" placeholder="Sign here">
 
@@ -263,7 +200,6 @@
   <script>
     (function(){
       const WEB_APP_URL = 'https://script.google.com/macros/s/AKfycbzkq-pAuTJ-Ayc8N1EN2fMvXKTWUAZZER-Fead9SlmU7akQ-sB_28UqkbATBBBa6VjL/exec';
-
       const form = document.getElementById('clientForm');
       const submitBtn = document.getElementById('submitBtn');
       const confirmation = document.getElementById('confirmation');
