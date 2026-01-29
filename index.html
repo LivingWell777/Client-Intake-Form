@@ -63,16 +63,12 @@
     #confirmation{display:none;color:green;text-align:center;margin-bottom:12px}
     .error{color:var(--error);font-size:13px}
     @media(min-width:700px){.two{flex:1 1 48%}.three{flex:1 1 30%}}
-   
-    /* Mobile improvements */
     @media(max-width:600px){
       body {padding:0 10px;}
       .submit-btn {width:100%; justify-content:center;}
       .checkbox-group label.inline,
       [role="radiogroup"] label.inline {width:100%; margin-bottom:8px;}
     }
-
-    /* Ensure checkbox/radio groups wrap on long lists */
     .checkbox-group, [role="radiogroup"] {
       display: flex;
       flex-wrap: wrap;
@@ -101,8 +97,7 @@
 
     <p id="confirmation" role="status" aria-live="polite">Thank you! Your form has been successfully submitted.</p>
 
-    <form id="clientForm" action="https://script.google.com/macros/s/AKfycbxsiQ911qAMUdxI7xjXonbjx1cvvvyUX2s3auVfpsnFv9EovDHOJfpwSP9BHhjbD3KY/exec" method="POST" novalidate>
-
+    <form id="clientForm" action="" method="POST" novalidate>
       <!-- 1. Personal Information -->
       <fieldset>
         <legend>1. Personal Information</legend>
@@ -224,12 +219,15 @@
 
   <script>
     (function(){
-      const WEB_APP_URL = 'https://script.google.com/macros/s/AKfycbxRF2usBtcaF_1kqttoGP3HN6t5R4AkIQAGz37qY3AD6RAIZ03lAVhziYosPbEIhBLn/exec';
+      // Only place to set your Apps Script Web App URL
+      const WEB_APP_URL = 'https://script.google.com/macros/s/AKfycbxmsq-xBPk8FCnGLPp4PPmqIE9kv30DWqKnlylegQbl4aCUssi3jubFPp3E98hToJOj/exec';
+
       const form = document.getElementById('clientForm');
       const submitBtn = document.getElementById('submitBtn');
       const confirmation = document.getElementById('confirmation');
       const formError = document.getElementById('formError');
 
+      // Set max date for date inputs
       const today = new Date().toISOString().split('T')[0];
       document.querySelectorAll('input[type="date"]').forEach(inp => inp.max = today);
 
@@ -271,14 +269,16 @@
       }
 
       function fallbackSubmit(){
-        ensureIframe();
-        form.target = 'submission_iframe';
+        const iframe = ensureIframe();
+        form.target = iframe.name;
+        form.action = WEB_APP_URL;
         form.submit();
         confirmation.style.display = 'block';
         confirmation.textContent = 'Form submitted (fallback mode).';
         form.reset();
         setTimeout(()=> confirmation.style.display='none',8000);
         form.removeAttribute('target');
+        form.removeAttribute('action');
       }
 
       form.addEventListener('submit', function(e){
