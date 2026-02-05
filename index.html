@@ -12,6 +12,7 @@
       --card:#fff;
       --muted:#888;
       --error:#b00020;
+      --grey-btn:#d3d3d3;
     }
     html,body{height:100%}
     body {
@@ -62,13 +63,19 @@
     .note{font-size:13px;color:#444;margin:6px 0}
     #confirmation{display:none;color:green;text-align:center;margin-bottom:12px}
     .error{color:var(--error);font-size:13px}
+    .mandatory-star {color:var(--error);margin-left:2px;}
+    .large-label {font-size:16px; font-weight:600; margin:8px 0 6px;}
     @media(min-width:700px){.two{flex:1 1 48%}.three{flex:1 1 30%}}
+
+    /* Mobile improvements */
     @media(max-width:600px){
       body {padding:0 10px;}
       .submit-btn {width:100%; justify-content:center;}
       .checkbox-group label.inline,
       [role="radiogroup"] label.inline {width:100%; margin-bottom:8px;}
     }
+
+    /* Ensure checkbox/radio groups wrap on long lists */
     .checkbox-group, [role="radiogroup"] {
       display: flex;
       flex-wrap: wrap;
@@ -79,6 +86,9 @@
       flex: 1 1 100%;
       min-width: 120px;
     }
+
+    /* Radio buttons for single service selection */
+    [role="radiogroup"] {flex-direction: column;}
   </style>
 </head>
 <body>
@@ -98,20 +108,21 @@
     <p id="confirmation" role="status" aria-live="polite">Thank you! Your form has been successfully submitted.</p>
 
     <form id="clientForm" action="" method="POST" novalidate>
+
       <!-- 1. Personal Information -->
       <fieldset>
         <legend>1. Personal Information</legend>
         <div class="form-row">
           <div class="two">
-            <label for="first_name">First name <span class="error">*</span></label>
+            <label for="first_name">First name<span class="mandatory-star">*</span></label>
             <input id="first_name" name="first_name" type="text" required autocomplete="given-name" placeholder="First">
           </div>
           <div class="two">
-            <label for="last_name">Last name <span class="error">*</span></label>
+            <label for="last_name">Last name<span class="mandatory-star">*</span></label>
             <input id="last_name" name="last_name" type="text" required autocomplete="family-name" placeholder="Last">
           </div>
           <div class="small">
-            <label for="dob">Date of birth <span class="error">*</span></label>
+            <label for="dob">Date of birth<span class="mandatory-star">*</span></label>
             <input id="dob" name="dob" type="date" required max="">
           </div>
         </div>
@@ -134,10 +145,10 @@
           </div>
         </div>
 
-        <label for="email">Email address <span class="error">*</span></label>
+        <label for="email">Email address<span class="mandatory-star">*</span></label>
         <input id="email" name="email" type="email" required placeholder="name@example.com">
 
-        <label>Preferred contact method (select at least one)</label>
+        <label>Preferred contact method (select at least one)<span class="mandatory-star">*</span></label>
         <div class="checkbox-group">
           <label class="inline"><input type="checkbox" name="contact_method" value="Email"> Email</label>
           <label class="inline"><input type="checkbox" name="contact_method" value="Phone"> Phone</label>
@@ -149,12 +160,12 @@
       <!-- 2. Service Selection -->
       <fieldset>
         <legend>2. Service Selection</legend>
-        <div class="checkbox-group">
-          <label class="inline"><input type="checkbox" name="service" value="Localised Chair Massage"> Localised Chair Massage</label>
-          <label class="inline"><input type="checkbox" name="service" value="Localised Massage with Oils"> Localised Massage with Oils</label>
-          <label class="inline"><input type="checkbox" name="service" value="Aromatherapy Massage"> Aromatherapy Massage</label>
-          <label class="inline"><input type="checkbox" name="service" value="Maderotherapy Massage"> Maderotherapy Massage</label>
-          <label class="inline"><input type="checkbox" name="service" value="Free 10-minute Quick Relief Massage"> Free 10-minute Quick Relief Massage</label>
+        <div role="radiogroup">
+          <label class="inline"><input type="radio" name="service" value="Localised Chair Massage" required> Localised Chair Massage</label>
+          <label class="inline"><input type="radio" name="service" value="Localised Massage with Oils" required> Localised Massage with Oils</label>
+          <label class="inline"><input type="radio" name="service" value="Aromatherapy Massage" required> Aromatherapy Massage</label>
+          <label class="inline"><input type="radio" name="service" value="Maderotherapy Massage" required> Maderotherapy Massage</label>
+          <label class="inline"><input type="radio" name="service" value="Free 10-minute Quick Relief Massage" required> Free 10-minute Quick Relief Massage</label>
         </div>
       </fieldset>
 
@@ -163,13 +174,12 @@
         <legend>3. Consent & Acknowledgement</legend>
         <p class="note">
           <strong>Nature of Service:</strong> I understand services are non-medical and complementary.<br>
-          <strong>Privacy & GDPR:</strong> Data stored securely for 7 years. Requests for access, correction, or deletion can be sent to contact@livingwell.be.<br>
-          <strong>Touch Consent:</strong> I understand massage involves physical touch.<br>
+          <strong>Privacy & GDPR:</strong> DATA IS NOT SHARED WITH THIRD PARTIES. Data stored securely for 7 years. Requests for access, correction, or deletion can be sent to contact@livingwell.be.<br>
           <strong>Liability Waiver:</strong> LivingWell is not responsible for adverse reactions if information is incomplete.
         </p>
         <label class="inline">
           <input type="checkbox" id="gdpr_consent" name="gdpr_consent" required>
-          I consent to the processing of my personal data in accordance with the privacy policy. <span class="error">*</span>
+          I consent to the processing of my personal data in accordance with the privacy policy<span class="mandatory-star">*</span>
         </label>
       </fieldset>
 
@@ -178,31 +188,31 @@
         <legend>4. House Rules</legend>
         <p class="note">
           1. <strong>Purpose of Services:</strong> All services are non-medical.<br>
-          2. <strong>Registration & Identification:</strong> Clients must register upon arrival. Presenting a valid ID may be required.<br>
-          5. <strong>Smoking/Vaping:</strong> Strictly prohibited within the premises.<br>
-          6. <strong>Alcohol/Substances:</strong> Consumption of alcohol or substances that may impair judgement is not permitted before or during treatments. We reserve the right to deny access to the centre and to services if the client is under the influence.<br>
-          7. <strong>Health Conditions:</strong> Notify the therapist of any and all health related conditions that are relevant before receiving your massage.<br>
-          8. <strong>Behavior:</strong> Respectful behavior is expected at all times. Aggressive or inappropriate conduct may result in immediate termination of services without refund and denial of access to our premises.<br>
-          9. <strong>Liability:</strong> LivingWell is not liable for accidents or injuries that occur on the premises.<br>
-          10. <strong>Photography:</strong> Photography and recording are not permitted during treatments to ensure privacy.<br>
-          11. <strong>Cancellations:</strong> Cancel at least 24 hours in advance. Late arrivals may reduce session length without refund.<br>
-          12. <strong>Payment:</strong> Payment is due in advance or latest at the time of service as a general rule. Accepted methods include cash and electronic payment.<br>
-          13. <strong>Safety:</strong> Notify the therapist immediately of any discomfort.<br>
-          14. <strong>Governing Law:</strong> This agreement is governed by Belgian law. The courts of Brussels have exclusive jurisdiction.
+          2. <strong>Registration:</strong> Clients must register upon arrival.<br>
+          3. <strong>Smoking/Vaping:</strong> Strictly prohibited within the premises.<br>
+          4. <strong>Alcohol/Substances:</strong> Consumption of alcohol or substances that may impair judgement is not permitted before or during treatments. We reserve the right to deny access to the centre and to services if the client is under the influence.<br>
+          5. <strong>Health Conditions:</strong> Notify the therapist of any and all health related conditions that are relevant before receiving your massage.<br>
+          6. <strong>Behavior:</strong> Respectful behavior is expected at all times. Aggressive or inappropriate conduct may result in immediate termination of services without refund and denial of access to our premises.<br>
+          7. <strong>Cancellations:</strong> Cancel at least 24 hours in advance. Late cancellations or no-shows may incur a fee.<br>
+          8. <strong>Payment:</strong> Payment is due in advance or latest at the time of service as a general rule. Accepted methods include cash and electronic payment.<br>
+          9. <strong>Safety:</strong> Notify the therapist immediately of any discomfort.<br>
+          10. <strong>Governing Law:</strong> This agreement is governed by Belgian law. The courts of the centre have exclusive jurisdiction.
         </p>
       </fieldset>
 
       <!-- 5. Marketing Consent -->
       <fieldset>
         <legend>5. Marketing Consent</legend>
+        <label class="large-label">I agree to receive occasional updates about LivingWell's activities and wellness services<span class="mandatory-star">*</span></label>
         <div role="radiogroup">
-          <label class="inline"><input type="radio" name="marketing" value="Agree"> I agree to receive LivingWell updates</label>
-          <label class="inline"><input type="radio" name="marketing" value="Disagree"> I do not wish to receive marketing communications</label>
+          <label class="inline"><input type="radio" name="marketing" value="Yes" required> Yes</label>
+          <label class="inline"><input type="radio" name="marketing" value="No" required> No</label>
         </div>
+        <p class="note">* No spam, just relevant information.</p>
       </fieldset>
 
       <p class="note">
-        By submitting this form, you agree to Livingwell's terms and conditions.
+        By submitting this form, you agree to LivingWell's terms and conditions.
       </p>
 
       <div style="display:flex;gap:12px;align-items:center">
@@ -219,15 +229,12 @@
 
   <script>
     (function(){
-      // Only place to set your Apps Script Web App URL
-      const WEB_APP_URL = 'https://script.google.com/macros/s/AKfycbxmsq-xBPk8FCnGLPp4PPmqIE9kv30DWqKnlylegQbl4aCUssi3jubFPp3E98hToJOj/exec';
-
+      const WEB_APP_URL = 'https://script.google.com/macros/s/AKfycbyPs5R10OBmJAoSZvDxtKP5NpIhYqbXT_sj2zm2QFVVivn09V3yQATlaS-hfyW___3M/exec';
       const form = document.getElementById('clientForm');
       const submitBtn = document.getElementById('submitBtn');
       const confirmation = document.getElementById('confirmation');
       const formError = document.getElementById('formError');
 
-      // Set max date for date inputs
       const today = new Date().toISOString().split('T')[0];
       document.querySelectorAll('input[type="date"]').forEach(inp => inp.max = today);
 
@@ -269,16 +276,19 @@
       }
 
       function fallbackSubmit(){
-        const iframe = ensureIframe();
-        form.target = iframe.name;
-        form.action = WEB_APP_URL;
+        ensureIframe();
+        form.target = 'submission_iframe';
         form.submit();
         confirmation.style.display = 'block';
         confirmation.textContent = 'Form submitted (fallback mode).';
         form.reset();
-        setTimeout(()=> confirmation.style.display='none',8000);
+        setTimeout(()=> {
+          confirmation.style.display='none';
+          submitBtn.disabled=false;
+          submitBtn.textContent='Submit';
+          submitBtn.style.backgroundColor = '';
+        },8000);
         form.removeAttribute('target');
-        form.removeAttribute('action');
       }
 
       form.addEventListener('submit', function(e){
@@ -287,7 +297,8 @@
         if(!customValidate()) return;
 
         submitBtn.disabled = true;
-        submitBtn.textContent = 'Sending…';
+        submitBtn.textContent = 'Submitted…';
+        submitBtn.style.backgroundColor = '#d3d3d3';
 
         const formData = new FormData(form);
 
@@ -302,16 +313,17 @@
             confirmation.style.display='block';
             confirmation.textContent='Thank you! Your form has been successfully submitted.';
             form.reset();
-            setTimeout(()=>confirmation.style.display='none',8000);
+            setTimeout(()=> {
+              confirmation.style.display='none';
+              submitBtn.disabled=false;
+              submitBtn.textContent='Submit';
+              submitBtn.style.backgroundColor = '';
+            },8000);
           } else {
             throw new Error(json.message||'Unexpected response');
           }
         })
-        .catch(()=> fallbackSubmit())
-        .finally(()=>{
-          submitBtn.disabled=false;
-          submitBtn.textContent='Submit';
-        });
+        .catch(()=> fallbackSubmit());
       });
     })();
   </script>
