@@ -12,7 +12,7 @@
       --card:#fff;
       --muted:#888;
       --error:#b00020;
-      --light-grey:#dcdcdc;
+      --light-grey:#ccc;
     }
     html,body{height:100%}
     body {
@@ -55,10 +55,9 @@
     .small{width:140px}
     .checkbox-group,label.inline{font-weight:400;display:inline-flex;align-items:center;gap:6px;margin-right:12px}
     .submit-btn{
-      display:inline-flex;align-items:center;gap:10px;background:var(--accent);color:#fff;padding:12px 20px;border-radius:8px;border:0;cursor:pointer;font-size:16px;
-      transition: background 0.3s;
+      display:inline-flex;align-items:center;gap:10px;background:var(--accent);color:#fff;padding:12px 20px;border-radius:8px;border:0;cursor:pointer;font-size:16px
     }
-    .submit-btn[disabled]{opacity:.6;cursor:not-allowed}
+    .submit-btn[disabled]{opacity:.6;cursor:not-allowed;background:var(--light-grey)}
     footer{text-align:center;font-size:12px;color:var(--muted);margin-top:22px;padding-top:12px;border-top:1px solid #eee}
     .visually-hidden{position:absolute!important;height:1px;width:1px;overflow:hidden;clip:rect(1px,1px,1px,1px);white-space:nowrap}
     .note{font-size:13px;color:#444;margin:6px 0}
@@ -78,17 +77,14 @@
     .checkbox-group, [role="radiogroup"] {
       display: flex;
       flex-wrap: wrap;
-      gap: 12px;
+      gap: 6px;
     }
     .checkbox-group label.inline,
     [role="radiogroup"] label.inline {
       flex: 1 1 100%;
       min-width: 120px;
     }
-    /* Larger font for marketing sentence */
-    .marketing-sentence {font-size:16px;margin-bottom:6px;font-weight:600;}
-    .checkbox-with-input{display:flex;align-items:center;gap:6px;}
-    .checkbox-with-input input[type="text"]{flex:1;}
+    .bold-label strong {font-weight:700;}
   </style>
 </head>
 <body>
@@ -148,24 +144,24 @@
         <label for="email">Email address <span class="error">*</span></label>
         <input id="email" name="email" type="email" required placeholder="name@example.com">
 
-        <label>Preferred contact method (select at least one)</label>
-        <div class="checkbox-group">
-          <label class="inline"><input type="checkbox" name="contact_method" value="Email"> Email</label>
-          <label class="inline"><input type="checkbox" name="contact_method" value="Phone"> Phone</label>
-          <label class="inline"><input type="checkbox" name="contact_method" value="SMS"> SMS</label>
-          <label class="inline"><input type="checkbox" name="contact_method" value="WhatsApp"> WhatsApp</label>
+        <label>Preferred contact method <span class="error">*</span></label>
+        <div role="radiogroup">
+          <label class="inline"><input type="radio" name="contact_method" value="Email"> Email</label>
+          <label class="inline"><input type="radio" name="contact_method" value="Phone"> Phone</label>
+          <label class="inline"><input type="radio" name="contact_method" value="SMS"> SMS</label>
+          <label class="inline"><input type="radio" name="contact_method" value="WhatsApp"> WhatsApp</label>
         </div>
       </fieldset>
 
       <!-- 2. Service Selection -->
       <fieldset>
         <legend>2. Service Selection</legend>
-        <div class="checkbox-group" id="serviceOptions">
-          <label class="inline"><input type="checkbox" name="service" value="Localised Chair Massage"> Localised Chair Massage</label>
-          <label class="inline"><input type="checkbox" name="service" value="Localised Massage with Oils"> Localised Massage with Oils</label>
-          <label class="inline"><input type="checkbox" name="service" value="Aromatherapy Massage"> Aromatherapy Massage</label>
-          <label class="inline"><input type="checkbox" name="service" value="Maderotherapy Massage"> Maderotherapy Massage</label>
-          <label class="inline"><input type="checkbox" name="service" value="Free 10-minute Quick Relief Massage"> Free 10-minute Quick Relief Massage</label>
+        <div role="radiogroup">
+          <label class="inline"><input type="radio" name="service" value="Localised Chair Massage"> Localised Chair Massage</label>
+          <label class="inline"><input type="radio" name="service" value="Localised Massage with Oils"> Localised Massage with Oils</label>
+          <label class="inline"><input type="radio" name="service" value="Aromatherapy Massage"> Aromatherapy Massage</label>
+          <label class="inline"><input type="radio" name="service" value="Maderotherapy Massage"> Maderotherapy Massage</label>
+          <label class="inline"><input type="radio" name="service" value="Free 10-minute Quick Relief Massage"> Free 10-minute Quick Relief Massage</label>
         </div>
       </fieldset>
 
@@ -180,7 +176,7 @@
           <label class="inline"><input type="checkbox" name="medical_conditions" value="Respiratory conditions such as asthma triggered by scents"> <strong>Respiratory conditions such as asthma triggered by scents</strong></label>
           <label class="inline"><input type="checkbox" name="medical_conditions" value="Neck, spine, or mobility limitations (chair massage)"> <strong>Neck, spine, or mobility limitations (chair massage)</strong></label>
           <label class="inline"><input type="checkbox" name="medical_conditions" value="Skin irritation, open wounds, or bruising in treatment area"> <strong>Skin irritation, open wounds, or bruising in treatment area</strong></label>
-          <label class="inline"><input type="checkbox" name="medical_conditions" value="Pregnancy (weeks)"> <strong>Pregnancy (weeks):</strong> <input type="text" name="medical_conditions" placeholder="Weeks"></label>
+          <label class="inline"><input type="checkbox" name="medical_conditions" value="Pregnancy (weeks)"> <strong>Pregnancy (weeks):</strong> <input type="text" name="medical_conditions" placeholder="weeks"></label>
           <label class="inline"><input type="checkbox" name="medical_conditions" value="Other medical conditions"> <strong>Other medical conditions:</strong> <input type="text" name="medical_conditions" placeholder="Specify"></label>
         </div>
       </fieldset>
@@ -190,8 +186,7 @@
         <legend>4. Consent & Acknowledgement</legend>
         <p class="note">
           <strong>Nature of Service:</strong> I understand services are non-medical and complementary.<br>
-          <strong>Privacy & GDPR:</strong> DATA IS STORED SECURELY FOR 7 YEARS AND IS NOT SHARED WITH THIRD PARTIES. Requests for access, correction, or deletion can be sent to contact@livingwell.be.<br>
-          <strong>Liability Waiver:</strong> LivingWell is not responsible for adverse reactions if information is incomplete.
+          <strong>Privacy & GDPR:</strong> DATA IS NOT SHARED WITH THIRD PARTIES. Data stored securely for 7 years. Requests for access, correction, or deletion can be sent to contact@livingwell.be.<br>
         </p>
         <label class="inline">
           <input type="checkbox" id="gdpr_consent" name="gdpr_consent" required>
@@ -218,12 +213,12 @@
       <!-- 6. Marketing Consent -->
       <fieldset>
         <legend>6. Marketing Consent</legend>
-        <p class="marketing-sentence">I agree to receive occasional updates about LivingWell's activities and wellness services. <span class="error">*</span></p>
-        <div role="radiogroup" class="checkbox-group">
-          <label class="inline"><input type="radio" name="marketing" value="Yes" required> Yes</label>
-          <label class="inline"><input type="radio" name="marketing" value="No" required> No</label>
+        <p style="font-weight:600;">I agree to receive occasional updates about LivingWell's activities and wellness services. <span class="error">*</span></p>
+        <div role="radiogroup">
+          <label class="inline"><input type="radio" name="marketing" value="Yes"> Yes</label>
+          <label class="inline"><input type="radio" name="marketing" value="No"> No</label>
         </div>
-        <p class="note">* No spam, just relevant information.</p>
+        <p style="font-size:13px; margin:4px 0;">*No spam, just relevant information.</p>
       </fieldset>
 
       <p class="note">
@@ -244,7 +239,7 @@
 
   <script>
     (function(){
-      const WEB_APP_URL = 'https://script.google.com/macros/s/AKfycbwqg9vxVNo6KlhDrgPrQo09U0WWSD7n9Efg6_8D5sU2aNV-s5hwaY--iHM0VNokzK1M/exec';
+      const WEB_APP_URL = 'https://script.google.com/macros/s/AKfycbx6b_iIpWuejdpiRSPdE5SizuYKR4bgx5jH0hQMRASmi6F5EuCyqvwXOaUrQlwMv2W7/exec';
       const form = document.getElementById('clientForm');
       const submitBtn = document.getElementById('submitBtn');
       const confirmation = document.getElementById('confirmation');
@@ -264,30 +259,28 @@
           showError('You must consent to the processing of personal data.');
           return false;
         }
+
         const methods = [...document.querySelectorAll('input[name="contact_method"]')];
         if(!methods.some(c => c.checked)){
           showError('Please select at least one preferred contact method.');
           return false;
         }
+
+        const service = [...document.querySelectorAll('input[name="service"]')];
+        if(!service.some(r => r.checked)){
+          showError('Please select a service.');
+          return false;
+        }
+
         const marketing = [...document.querySelectorAll('input[name="marketing"]')];
         if(!marketing.some(r => r.checked)){
           showError('Please select your marketing preference.');
           return false;
         }
+
         showError('');
         return true;
       }
-
-      // Only allow one service selection
-      document.querySelectorAll('#serviceOptions input[type="checkbox"]').forEach(cb=>{
-        cb.addEventListener('change', e=>{
-          if(e.target.checked){
-            document.querySelectorAll('#serviceOptions input[type="checkbox"]').forEach(other=>{
-              if(other!==e.target) other.checked=false;
-            });
-          }
-        });
-      });
 
       function ensureIframe(){
         let iframe = document.getElementById('submission_iframe');
@@ -308,9 +301,13 @@
         confirmation.style.display = 'block';
         confirmation.textContent = 'Form submitted (fallback mode).';
         form.reset();
-        submitBtn.style.backgroundColor='';
-        submitBtn.textContent='Submit';
-        setTimeout(()=> confirmation.style.display='none',8000);
+        submitBtn.disabled = true;
+        submitBtn.textContent = 'Submitted';
+        setTimeout(()=> {
+          confirmation.style.display='none';
+          submitBtn.disabled = false;
+          submitBtn.textContent='Submit';
+        },8000);
         form.removeAttribute('target');
       }
 
@@ -320,12 +317,34 @@
         if(!customValidate()) return;
 
         submitBtn.disabled = true;
-        submitBtn.style.backgroundColor='var(--light-grey)';
-        submitBtn.textContent='Submitted';
+        submitBtn.textContent = 'Submitted';
+        submitBtn.style.background = '#ccc';
 
         const formData = new FormData(form);
 
         fetch(WEB_APP_URL,{method:'POST',body:formData})
         .then(res => {
           if(!res.ok) throw new Error('Server error');
-          const ct=res
+          const ct=res.headers.get('content-type')||'';
+          return ct.includes('json') ? res.json() : {status:'success'};
+        })
+        .then(json=>{
+          if(json.status==='success'){
+            confirmation.style.display='block';
+            confirmation.textContent='Thank you! Your form has been successfully submitted.';
+            form.reset();
+            setTimeout(()=> {
+              confirmation.style.display='none';
+              submitBtn.disabled = false;
+              submitBtn.textContent='Submit';
+              submitBtn.style.background = 'var(--accent)';
+            },8000);
+          } else {
+            throw new Error(json.message || 'Unknown error');
+          }
+        }).catch(err=>{showError(err.message);fallbackSubmit()});
+      });
+    })();
+  </script>
+</body>
+</html>
