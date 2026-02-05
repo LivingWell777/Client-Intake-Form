@@ -64,16 +64,12 @@
     #confirmation{display:none;color:green;text-align:center;margin-bottom:12px}
     .error{color:var(--error);font-size:13px}
     @media(min-width:700px){.two{flex:1 1 48%}.three{flex:1 1 30%}}
-
-    /* Mobile improvements */
     @media(max-width:600px){
       body {padding:0 10px;}
       .submit-btn {width:100%; justify-content:center;}
       .checkbox-group label.inline,
       [role="radiogroup"] label.inline {width:100%; margin-bottom:8px;}
     }
-
-    /* Ensure checkbox/radio groups wrap on long lists */
     .checkbox-group, [role="radiogroup"] {
       display: flex;
       flex-wrap: wrap;
@@ -137,19 +133,19 @@
           </div>
           <div class="three">
             <label for="phone">Phone number</label>
-            <input id="phone" name="phone" type="tel" placeholder="+32 123 456 789">
+            <input id="phone" name="phone" type="tel" placeholder="e.g. 123456789">
           </div>
         </div>
 
         <label for="email">Email address <span class="error">*</span></label>
         <input id="email" name="email" type="email" required placeholder="name@example.com">
 
-        <label>Preferred contact method <span class="error">*</span></label>
-        <div role="radiogroup">
-          <label class="inline"><input type="radio" name="contact_method" value="Email"> Email</label>
-          <label class="inline"><input type="radio" name="contact_method" value="Phone"> Phone</label>
-          <label class="inline"><input type="radio" name="contact_method" value="SMS"> SMS</label>
-          <label class="inline"><input type="radio" name="contact_method" value="WhatsApp"> WhatsApp</label>
+        <label>Preferred contact method (please select at least one) <span class="error">*</span></label>
+        <div class="checkbox-group">
+          <label class="inline"><input type="checkbox" name="contact_method" value="Email"> Email</label>
+          <label class="inline"><input type="checkbox" name="contact_method" value="Phone"> Phone</label>
+          <label class="inline"><input type="checkbox" name="contact_method" value="SMS"> SMS</label>
+          <label class="inline"><input type="checkbox" name="contact_method" value="WhatsApp"> WhatsApp</label>
         </div>
       </fieldset>
 
@@ -176,8 +172,8 @@
           <label class="inline"><input type="checkbox" name="medical_conditions" value="Respiratory conditions such as asthma triggered by scents"> <strong>Respiratory conditions such as asthma triggered by scents</strong></label>
           <label class="inline"><input type="checkbox" name="medical_conditions" value="Neck, spine, or mobility limitations (chair massage)"> <strong>Neck, spine, or mobility limitations (chair massage)</strong></label>
           <label class="inline"><input type="checkbox" name="medical_conditions" value="Skin irritation, open wounds, or bruising in treatment area"> <strong>Skin irritation, open wounds, or bruising in treatment area</strong></label>
-          <label class="inline"><input type="checkbox" name="medical_conditions" value="Pregnancy (weeks)"> <strong>Pregnancy (weeks):</strong> <input type="text" name="medical_conditions" placeholder="weeks"></label>
-          <label class="inline"><input type="checkbox" name="medical_conditions" value="Other medical conditions"> <strong>Other medical conditions:</strong> <input type="text" name="medical_conditions" placeholder="Specify"></label>
+          <label class="inline"><input type="checkbox" id="pregnancy_cb" name="medical_conditions" value="Pregnancy (weeks)"> <strong>Pregnancy (weeks):</strong> <input type="text" id="pregnancy_text" name="pregnancy_weeks" placeholder="weeks" disabled></label>
+          <label class="inline"><input type="checkbox" id="other_cb" name="medical_conditions" value="Other medical conditions"> <strong>Other medical conditions:</strong> <input type="text" id="other_text" name="other_conditions" placeholder="Specify" disabled></label>
         </div>
       </fieldset>
 
@@ -239,7 +235,7 @@
 
   <script>
     (function(){
-      const WEB_APP_URL = 'https://script.google.com/macros/s/AKfycbx6b_iIpWuejdpiRSPdE5SizuYKR4bgx5jH0hQMRASmi6F5EuCyqvwXOaUrQlwMv2W7/exec';
+      const WEB_APP_URL = 'YOUR_WEB_APP_URL_HERE';
       const form = document.getElementById('clientForm');
       const submitBtn = document.getElementById('submitBtn');
       const confirmation = document.getElementById('confirmation');
@@ -248,66 +244,61 @@
       const today = new Date().toISOString().split('T')[0];
       document.querySelectorAll('input[type="date"]').forEach(inp => inp.max = today);
 
+      // Enable/disable pregnancy & other fields
+      const pregCB = document.getElementById('pregnancy_cb');
+      const pregText = document.getElementById('pregnancy_text');
+      const otherCB = document.getElementById('other_cb');
+      const otherText = document.getElementById('other_text');
+
+      pregCB.addEventListener('change',()=>{pregText.disabled=!pregCB.checked; if(!pregCB.checked) pregText.value=''});
+      otherCB.addEventListener('change',()=>{otherText.disabled=!otherCB.checked; if(!otherCB.checked) otherText.value=''});
+
       function showError(msg){
         formError.textContent = msg;
         formError.style.display = msg ? 'block' : 'none';
       }
 
       function customValidate(){
-        const gdpr = document.getElementById('gdpr_consent');
-        if(!gdpr.checked){
+        // GDPR consent
+        if(!document.getElementById('gdpr_consent').checked){
           showError('You must consent to the processing of personal data.');
           return false;
         }
-
+        // Contact method
         const methods = [...document.querySelectorAll('input[name="contact_method"]')];
         if(!methods.some(c => c.checked)){
           showError('Please select at least one preferred contact method.');
           return false;
         }
-
+        // Service
         const service = [...document.querySelectorAll('input[name="service"]')];
         if(!service.some(r => r.checked)){
           showError('Please select a service.');
           return false;
         }
-
+        // Marketing
         const marketing = [...document.querySelectorAll('input[name="marketing"]')];
         if(!marketing.some(r => r.checked)){
           showError('Please select your marketing preference.');
           return false;
         }
-
         showError('');
         return true;
       }
 
-      function ensureIframe(){
-        let iframe = document.getElementById('submission_iframe');
-        if(!iframe){
-          iframe = document.createElement('iframe');
-          iframe.style.display = 'none';
-          iframe.id = 'submission_iframe';
-          iframe.name = 'submission_iframe';
-          document.body.appendChild(iframe);
-        }
-        return iframe;
-      }
-
       function fallbackSubmit(){
-        ensureIframe();
-        form.target = 'submission_iframe';
+        const iframe=document.createElement('iframe');
+        iframe.style.display='none';
+        iframe.name='submission_iframe';
+        document.body.appendChild(iframe);
+        form.target='submission_iframe';
         form.submit();
-        confirmation.style.display = 'block';
-        confirmation.textContent = 'Form submitted (fallback mode).';
+        confirmation.style.display='block';
+        confirmation.textContent='Form submitted (fallback mode).';
         form.reset();
-        submitBtn.disabled = true;
-        submitBtn.textContent = 'Submitted';
-        setTimeout(()=> {
-          confirmation.style.display='none';
-          submitBtn.disabled = false;
-          submitBtn.textContent='Submit';
-        },8000);
+        submitBtn.disabled=true;
+        submitBtn.textContent='Submitted';
+        setTimeout(()=>{confirmation.style.display='none'; submitBtn.disabled=false; submitBtn.textContent='Submit'},8000);
         form.removeAttribute('target');
       }
 
@@ -316,33 +307,32 @@
         if(!form.checkValidity()){form.reportValidity();return;}
         if(!customValidate()) return;
 
-        submitBtn.disabled = true;
-        submitBtn.textContent = 'Submitted';
-        submitBtn.style.background = '#ccc';
+        submitBtn.disabled=true;
+        submitBtn.textContent='Submitted';
+        submitBtn.style.background='#ccc';
 
         const formData = new FormData(form);
 
         fetch(WEB_APP_URL,{method:'POST',body:formData})
-        .then(res => {
-          if(!res.ok) throw new Error('Server error');
-          const ct=res.headers.get('content-type')||'';
-          return ct.includes('json') ? res.json() : {status:'success'};
-        })
+        .then(res=>{if(!res.ok)throw new Error('Server error');const ct=res.headers.get('content-type')||'';return ct.includes('json')?res.json():{status:'success'};})
         .then(json=>{
           if(json.status==='success'){
             confirmation.style.display='block';
             confirmation.textContent='Thank you! Your form has been successfully submitted.';
             form.reset();
-            setTimeout(()=> {
+            pregText.disabled=true;
+            otherText.disabled=true;
+            setTimeout(()=>{
               confirmation.style.display='none';
-              submitBtn.disabled = false;
+              submitBtn.disabled=false;
               submitBtn.textContent='Submit';
-              submitBtn.style.background = 'var(--accent)';
+              submitBtn.style.background='var(--accent)';
             },8000);
-          } else {
-            throw new Error(json.message || 'Unknown error');
-          }
-        }).catch(err=>{showError(err.message);fallbackSubmit()});
+          } else throw new Error(json.message||'Unknown error');
+        }).catch(err=>{
+          console.error(err);
+          fallbackSubmit();
+        });
       });
     })();
   </script>
