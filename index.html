@@ -36,7 +36,7 @@
       width:100%;
       height:auto;
       max-height:180px;
-      object-fit:cover;
+      object-fit:contain; /* Changed from cover to contain */
       margin-bottom:8px;
       display:block;
     }
@@ -133,7 +133,7 @@
           </div>
           <div class="three">
             <label for="phone">Phone number</label>
-            <input id="phone" name="phone" type="tel" placeholder="12 345 678 910">
+            <input id="phone" name="phone" type="tel" placeholder="+12 345 678 910">
           </div>
         </div>
 
@@ -172,7 +172,7 @@
           <label class="inline"><input type="checkbox" name="medical_conditions" value="Respiratory conditions such as asthma triggered by scents"> <strong>Respiratory conditions such as asthma triggered by scents</strong></label>
           <label class="inline"><input type="checkbox" name="medical_conditions" value="Neck, spine, or mobility limitations (chair massage)"> <strong>Neck, spine, or mobility limitations (chair massage)</strong></label>
           <label class="inline"><input type="checkbox" name="medical_conditions" value="Skin irritation, open wounds, or bruising in treatment area"> <strong>Skin irritation, open wounds, or bruising in treatment area</strong></label>
-          <label class="inline"><input type="checkbox" id="pregnancy_cb" name="medical_conditions" value="Pregnancy (weeks)"> <strong>Pregnancy (weeks):</strong> <input type="text" id="pregnancy_text" name="pregnancy_weeks" placeholder="Weeks" disabled></label>
+          <label class="inline"><input type="checkbox" id="pregnancy_cb" name="medical_conditions" value="Pregnancy (weeks)"> <strong>Pregnancy (weeks):</strong> <input type="text" id="pregnancy_text" name="pregnancy_weeks" placeholder="12" disabled></label>
           <label class="inline"><input type="checkbox" id="other_cb" name="medical_conditions" value="Other medical conditions"> <strong>Other medical conditions:</strong> <input type="text" id="other_text" name="other_conditions" placeholder="Specify" disabled></label>
         </div>
       </fieldset>
@@ -193,17 +193,17 @@
       <!-- 5. House Rules -->
       <fieldset>
         <legend>5. House Rules</legend>
-        <p class="note">
-          1. <strong>Purpose of Services:</strong> All services are non-medical.<br>
-          2. <strong>Registration & Identification:</strong> Clients must register upon arrival.<br>
-          5. <strong>Smoking/Vaping:</strong> Strictly prohibited within the premises.<br>
-          6. <strong>Alcohol/Substances:</strong> Consumption of alcohol or substances that may impair judgement is not permitted before or during treatments. We reserve the right to deny access to the centre and to services if the client is under the influence.<br>
-          7. <strong>Health Conditions:</strong> Notify the therapist of any and all health related conditions that are relevant before receiving your massage.<br>
-          11. <strong>Cancellations:</strong> Cancel at least 24 hours in advance. Late cancellations or no shows may incur a fee.<br>
-          12. <strong>Payment:</strong> Payment is due in advance or latest at the time of service as a general rule. Accepted methods include cash and electronic payment.<br>
-          13. <strong>Safety:</strong> Notify the therapist immediately of any discomfort.<br>
-          14. <strong>Governing Law:</strong> This agreement is governed by Belgian law. The courts of the centre have exclusive jurisdiction.
-        </p>
+        <ol class="note">
+          <li><strong>Purpose of Services:</strong> All services are non-medical.</li>
+          <li><strong>Registration & Identification:</strong> Clients must register upon arrival.</li>
+          <li><strong>Smoking/Vaping:</strong> Strictly prohibited within the premises.</li>
+          <li><strong>Alcohol/Substances:</strong> Consumption of alcohol or substances that may impair judgement is not permitted before or during treatments. We reserve the right to deny access to the centre and to services if the client is under the influence.</li>
+          <li><strong>Health Conditions:</strong> Notify the therapist of any and all health related conditions that are relevant before receiving your massage.</li>
+          <li><strong>Cancellations:</strong> Cancel at least 24 hours in advance. Late cancellations or no shows may incur a fee.</li>
+          <li><strong>Payment:</strong> Payment is due in advance or latest at the time of service as a general rule. Accepted methods include cash and electronic payment.</li>
+          <li><strong>Safety:</strong> Notify the therapist immediately of any discomfort.</li>
+          <li><strong>Governing Law:</strong> This agreement is governed by Belgian law. The courts of the centre have exclusive jurisdiction.</li>
+        </ol>
       </fieldset>
 
       <!-- 6. Marketing Consent -->
@@ -235,92 +235,35 @@
 
   <script>
     (function(){
-      const WEB_APP_URL = 'https://script.google.com/macros/s/AKfycbyC87xpgz8ManAq7uZn-rDPQ-WEphSg8ZXUFq2967p79ifP-KCd_0riNlhieThB7Dt2/exec';
+      const WEB_APP_URL = 'https://script.google.com/macros/s/AKfycbzAht_88kvFy7b9FwkbGV_D0PRnOn4v_PHdCHIq9PQskNE_pbWBLie2mORGi-EEFaVP/exec'; // replace with deployed Web App URL
       const form = document.getElementById('clientForm');
       const submitBtn = document.getElementById('submitBtn');
       const confirmation = document.getElementById('confirmation');
       const formError = document.getElementById('formError');
-
-      const today = new Date().toISOString().split('T')[0];
-      document.querySelectorAll('input[type="date"]').forEach(inp => inp.max = today);
-
-      // Enable/disable pregnancy & other fields
-      const pregCB = document.getElementById('pregnancy_cb');
-      const pregText = document.getElementById('pregnancy_text');
+      const pregnancyCB = document.getElementById('pregnancy_cb');
+      const pregnancyText = document.getElementById('pregnancy_text');
       const otherCB = document.getElementById('other_cb');
       const otherText = document.getElementById('other_text');
 
-      pregCB.addEventListener('change',()=>{pregText.disabled=!pregCB.checked; if(!pregCB.checked) pregText.value=''});
-      otherCB.addEventListener('change',()=>{otherText.disabled=!otherCB.checked; if(!otherCB.checked) otherText.value=''});
+      pregnancyCB.addEventListener('change',()=>{pregnancyText.disabled=!pregnancyCB.checked; if(!pregnancyCB.checked) pregnancyText.value='';});
+      otherCB.addEventListener('change',()=>{otherText.disabled=!otherCB.checked; if(!otherCB.checked) otherText.value='';});
 
-      function showError(msg){
-        formError.textContent = msg;
-        formError.style.display = msg ? 'block' : 'none';
-      }
-
-      function customValidate(){
-        // GDPR consent
-        if(!document.getElementById('gdpr_consent').checked){
-          showError('You must consent to the processing of personal data.');
-          return false;
-        }
-        // Contact method
-        const methods = [...document.querySelectorAll('input[name="contact_method"]')];
-        if(!methods.some(c => c.checked)){
-          showError('Please select at least one preferred contact method.');
-          return false;
-        }
-        // Service
-        const service = [...document.querySelectorAll('input[name="service"]')];
-        if(!service.some(r => r.checked)){
-          showError('Please select a service.');
-          return false;
-        }
-        // Marketing
-        const marketing = [...document.querySelectorAll('input[name="marketing"]')];
-        if(!marketing.some(r => r.checked)){
-          showError('Please select your marketing preference.');
-          return false;
-        }
-        showError('');
-        return true;
-      }
-
-      function fallbackSubmit(){
-        const iframe=document.createElement('iframe');
-        iframe.style.display='none';
-        iframe.name='submission_iframe';
-        document.body.appendChild(iframe);
-        form.target='submission_iframe';
-        form.submit();
-        confirmation.style.display='block';
-        confirmation.textContent='Form submitted (fallback mode).';
-        form.reset();
+      form.addEventListener('submit', function(evt){
+        evt.preventDefault();
+        formError.style.display='none';
         submitBtn.disabled=true;
-        submitBtn.textContent='Submitted';
-        setTimeout(()=>{confirmation.style.display='none'; submitBtn.disabled=false; submitBtn.textContent='Submit'},8000);
-        form.removeAttribute('target');
-      }
-
-      form.addEventListener('submit', function(e){
-        e.preventDefault();
-        if(!form.checkValidity()){form.reportValidity();return;}
-        if(!customValidate()) return;
-
-        submitBtn.disabled=true;
-        submitBtn.textContent='Submitted';
-        submitBtn.style.background='#ccc';
+        submitBtn.textContent='Submitting...';
+        submitBtn.style.background='var(--light-grey)';
 
         const formData = new FormData(form);
-
-        fetch(WEB_APP_URL,{method:'POST',body:formData})
-        .then(res=>{if(!res.ok)throw new Error('Server error');const ct=res.headers.get('content-type')||'';return ct.includes('json')?res.json():{status:'success'};})
-        .then(json=>{
+        fetch(WEB_APP_URL,{
+          method:'POST',
+          body: formData
+        }).then(r=>r.json()).then(json=>{
           if(json.status==='success'){
             confirmation.style.display='block';
-            confirmation.textContent='Thank you! Your form has been successfully submitted.';
             form.reset();
-            pregText.disabled=true;
+            pregnancyText.disabled=true;
             otherText.disabled=true;
             setTimeout(()=>{
               confirmation.style.display='none';
@@ -331,7 +274,11 @@
           } else throw new Error(json.message||'Unknown error');
         }).catch(err=>{
           console.error(err);
-          fallbackSubmit();
+          formError.style.display='block';
+          formError.textContent='Submission failed. Please try again later.';
+          submitBtn.disabled=false;
+          submitBtn.textContent='Submit';
+          submitBtn.style.background='var(--accent)';
         });
       });
     })();
