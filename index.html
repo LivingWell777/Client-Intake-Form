@@ -81,6 +81,17 @@
       min-width: 120px;
     }
     .bold-label strong {font-weight:700;}
+
+    /* Style for the required fields with red star */
+    .error {
+      color: var(--error);
+      font-size: 13px;
+    }
+
+    .error:before {
+      content: " *";
+      color: red;
+    }
   </style>
 </head>
 <body>
@@ -175,7 +186,7 @@
       </div>
     </fieldset>
 
-    <!-- 4. Consent -->
+    <!-- 4. Consent & Acknowledgement -->
     <fieldset>
       <legend>4. Consent & Acknowledgement</legend>
       <p class="note">
@@ -232,7 +243,7 @@
 
 <script>
 (function(){
-  const WEB_APP_URL = 'https://script.google.com/macros/s/AKfycbx_cAxbjKODENFKR4GqVOKZ2pZRv5aTi5_ResTZDesM7SL8DC-0kBhRA8qEpl5gbZHH/exec';
+  const WEB_APP_URL = 'https://script.google.com/macros/s/AKfycbwVJv-C-Y1igvdN6EN7YUFPTr740T9jvedXNBI7x4PfvknbAOVKGvJv7Y3KiHKyj9sM/exec';
   const form = document.getElementById('clientForm');
   const submitBtn = document.getElementById('submitBtn');
   const confirmation = document.getElementById('confirmation');
@@ -241,6 +252,7 @@
   const pregnancyText = document.getElementById('pregnancy_text');
   const otherCB = document.getElementById('other_cb');
   const otherText = document.getElementById('other_text');
+  const gdprConsent = document.getElementById('gdpr_consent');
 
   // Toggle text fields for pregnancy & other
   function clearFieldError(field){ const parent=field.parentNode; parent.querySelectorAll('.error').forEach(e=>e.remove());}
@@ -287,30 +299,27 @@
     if(pregnancyCB.checked && !pregnancyText.value.trim()){ showFieldError(pregnancyText,'Please specify weeks'); valid=false; }
     if(otherCB.checked && !otherText.value.trim()){ showFieldError(otherText,'Please specify condition'); valid=false; }
 
-    if(!valid){ formError.style.display='block'; formError.textContent='Please correct the highlighted fields to submit the form.'; return; }
+    // GDPR consent checkbox
+    if(!gdprConsent.checked){
+      showFieldError(gdprConsent, 'You must consent to the processing of your personal data');
+      valid=false;
+    }
 
-    // Submit to Apps Script
-    submitBtn.disabled=true; submitBtn.textContent='Submitting...'; submitBtn.style.background='var(--light-grey)';
-    const formData=new FormData(form);
-    fetch(WEB_APP_URL,{method:'POST',body:formData})
-      .then(r=>r.json()).then(json=>{
-        if(json.status==='success'){
-          confirmation.style.display='block'; form.reset();
-          pregnancyText.disabled=true; otherText.disabled=true;
-          setTimeout(()=>{
-            confirmation.style.display='none'; submitBtn.disabled=false; submitBtn.textContent='Submit'; submitBtn.style.background='var(--accent)';
-          },8000);
-        } else {
-          formError.style.display='block'; formError.textContent=json.message || 'Submission failed. Please try again later.';
-          submitBtn.disabled=false; submitBtn.textContent='Submit'; submitBtn.style.background='var(--accent)';
-        }
+    if(valid){
+      submitBtn.setAttribute('disabled','');
+      const formData=new FormData(form);
+      fetch(WEB_APP_URL,{method:'POST',body:formData}).then(res=>{
+        confirmation.style.display='block';
+        form.reset();
+        submitBtn.removeAttribute('disabled');
       }).catch(err=>{
-        console.error(err); formError.style.display='block'; formError.textContent='Submission failed. Please try again later.';
-        submitBtn.disabled=false; submitBtn.textContent='Submit'; submitBtn.style.background='var(--accent)';
+        formError.textContent="There was an error submitting the form. Please try again.";
+        formError.style.display='block';
+        submitBtn.removeAttribute('disabled');
       });
+    }
   });
 })();
 </script>
-
 </body>
 </html>
