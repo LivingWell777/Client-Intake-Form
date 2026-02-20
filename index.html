@@ -190,33 +190,21 @@ footer{text-align:center;font-size:12px;color:var(--muted);margin-top:22px;paddi
   <fieldset>
     <legend>2. Service Selection</legend>
     <div role="radiogroup">
-      <label class="inline"><input type="radio" name="service" value="Localised Chair Massage" required> Localised Chair Massage</label>
+      <label class="inline"><input type="radio" name="service" value="Chair Massage" required> Chair Massage</label>
       <label class="inline"><input type="radio" name="service" value="Localised Massage with Oils"> Localised Massage with Oils</label>
       <label class="inline"><input type="radio" name="service" value="Aromatherapy Massage"> Aromatherapy Massage</label>
+      <label class="inline"><input type="radio" name="service" value="Full-body Aromatherapy"> Full-body Aromatherapy</label>
       <label class="inline"><input type="radio" name="service" value="Maderotherapy Massage"> Maderotherapy Massage</label>
+      <label class="inline"><input type="radio" name="service" value="Pre-natal Massage"> Pre-natal Massage</label>
+      <label class="inline"><input type="radio" name="service" value="Post-natal Massage"> Post-natal Massage</label>
+      <label class="inline"><input type="radio" name="service" value="Facial Treatment"> Facial Treatment</label>
       <label class="inline"><input type="radio" name="service" value="Free 10-minute Quick Relief Massage"> Free 10-minute Quick Relief Massage</label>
     </div>
   </fieldset>
 
-  <!-- 3. Medical Conditions -->
+  <!-- 3. Consent & Acknowledgement -->
   <fieldset>
-    <legend>3. Medical Conditions</legend>
-    <p class="note">Please indicate any relevant conditions before participating. This information is helpful to alert the therapist about special considerations for a comfortable experience:</p>
-    <div role="group" class="checkbox-group" style="gap:6px;">
-      <label class="inline"><input type="checkbox" name="medical_conditions" value="Varicose veins, circulation issues, or recent inflammation (important for maderotherapy)"> <strong>Varicose veins, circulation issues, or recent inflammation (important for maderotherapy)</strong></label>
-      <label class="inline"><input type="checkbox" name="medical_conditions" value="Sensitivity to strong pressure or cellulite/fibrosis treatment"> <strong>Sensitivity to strong pressure or cellulite/fibrosis treatment</strong></label>
-      <label class="inline"><input type="checkbox" name="medical_conditions" value="Allergies or sensitivities to essential oils or fragrances (aromatherapy)"> <strong>Allergies or sensitivities to essential oils or fragrances (aromatherapy)</strong></label>
-      <label class="inline"><input type="checkbox" name="medical_conditions" value="Respiratory conditions such as asthma triggered by scents"> <strong>Respiratory conditions such as asthma triggered by scents</strong></label>
-      <label class="inline"><input type="checkbox" name="medical_conditions" value="Neck, spine, or mobility limitations (chair massage)"> <strong>Neck, spine, or mobility limitations (chair massage)</strong></label>
-      <label class="inline"><input type="checkbox" name="medical_conditions" value="Skin irritation, open wounds, or bruising in treatment area"> <strong>Skin irritation, open wounds, or bruising in treatment area</strong></label>
-      <label class="inline"><input type="checkbox" id="pregnancy_cb" name="medical_conditions" value="Pregnancy (weeks)"> <strong>Pregnancy (weeks):</strong> <input type="text" id="pregnancy_text" name="pregnancy_weeks" placeholder="12" disabled required></label>
-      <label class="inline"><input type="checkbox" id="other_cb" name="medical_conditions" value="Other medical conditions"> <strong>Other medical conditions:</strong> <input type="text" id="other_text" name="other_conditions" placeholder="Specify" disabled required></label>
-    </div>
-  </fieldset>
-
-  <!-- 4. Consent & Acknowledgement -->
-  <fieldset>
-    <legend>4. Consent & Acknowledgement</legend>
+    <legend>3. Consent & Acknowledgement</legend>
     <p class="note">
       Please <a href="#" id="openConsent" style="color:var(--accent); text-decoration:underline;">read the full Consent & Acknowledgement</a> before agreeing.
     </p>
@@ -226,17 +214,17 @@ footer{text-align:center;font-size:12px;color:var(--muted);margin-top:22px;paddi
     </label>
   </fieldset>
 
-  <!-- 5. Policies & Procedures -->
+  <!-- 4. Policies & Procedures -->
   <fieldset>
-    <legend>5. Policies & Procedures</legend>
+    <legend>4. Policies & Procedures</legend>
     <p class="note">
       Please <a href="#" id="openPolicies" style="color:var(--accent); text-decoration:underline;">read the full Policies & Procedures</a> before agreeing.
     </p>
   </fieldset>
 
-  <!-- 6. Stay Informed! -->
+  <!-- 5. Stay Informed! -->
   <fieldset>
-    <legend>6. Stay Informed!</legend>
+    <legend>5. Stay Informed!</legend>
     <p style="font-weight:600;">I agree to receive occasional updates about LivingWell's activities and wellness services.</p>
     <div role="radiogroup">
       <label class="inline"><input type="radio" name="marketing" value="Yes"> Yes</label>
@@ -259,7 +247,7 @@ footer{text-align:center;font-size:12px;color:var(--muted);margin-top:22px;paddi
   LivingWell Centre – Chaussée d'Etterbeek 64, 1040 Bruxelles – contact@livingwell.be – February 2026
 </footer>
 
-<!-- MODALS -->
+<!-- MODALS (unchanged from your version) -->
 <div id="consentModal" class="modal">
   <div class="modal-content">
     <span class="close-modal" data-target="consentModal">&times;</span>
@@ -305,10 +293,6 @@ footer{text-align:center;font-size:12px;color:var(--muted);margin-top:22px;paddi
   const submitBtn = document.getElementById('submitBtn');
   const confirmation = document.getElementById('confirmation');
   const formError = document.getElementById('formError');
-  const pregnancyCB = document.getElementById('pregnancy_cb');
-  const pregnancyText = document.getElementById('pregnancy_text');
-  const otherCB = document.getElementById('other_cb');
-  const otherText = document.getElementById('other_text');
   const gdprConsent = document.getElementById('gdpr_consent');
 
   function clearFieldError(field){
@@ -327,10 +311,7 @@ footer{text-align:center;font-size:12px;color:var(--muted);margin-top:22px;paddi
     formError.style.display='none';
   }
 
-  pregnancyCB.addEventListener('change',()=>{pregnancyText.disabled=!pregnancyCB.checked; if(!pregnancyCB.checked) pregnancyText.value=''; clearFieldError(pregnancyText);});
-  otherCB.addEventListener('change',()=>{otherText.disabled=!otherCB.checked; if(!otherCB.checked) otherText.value=''; clearFieldError(otherText);});
-
-  ['first_name','last_name','email','pregnancy_text','other_text'].forEach(id=>{
+  ['first_name','last_name','email'].forEach(id=>{
     const field=document.getElementById(id);
     field.addEventListener('input',()=>clearFieldError(field));
   });
