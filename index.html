@@ -1,245 +1,302 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>LivingWell Centre – Client Intake & Consent Form</title>
-  <style>
-    :root{
-      --accent:#568273;
-      --accent-dark:#46695e;
-      --bg:#f4f4f4;
-      --card:#fff;
-      --muted:#888;
-      --error:#b00020;
-      --light-grey:#ccc;
-    }
-    html,body{height:100%}
-    body {
-      font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
-      color: #222;
-      background-color: var(--bg);
-      margin: 0;
-      padding: 0 12px;
-      -webkit-font-smoothing:antialiased;
-    }
-    .container {
-      max-width: 860px;
-      margin: 30px auto;
-      background-color: var(--card);
-      padding: 28px;
-      border-radius: 10px;
-      box-shadow: 0 6px 20px rgba(0,0,0,0.06);
-    }
-    .header {text-align:center;margin-bottom:18px}
-    .header img{
-      width:100%;
-      height:auto;
-      max-height:180px;
-      object-fit:contain;
-      margin-bottom:8px;
-      display:block;
-    }
-    h1{color:var(--accent);margin:0 0 6px;font-size:22px}
-    p.intro{font-size:15px;line-height:1.6;margin:8px 0 18px}
-    fieldset{
-      border:1px solid #e6e6e6;border-radius:8px;margin-bottom:20px;padding:16px;background:#fbfbfb
-    }
-    legend{font-weight:700;color:var(--accent);padding:0 6px}
-    .form-row{display:flex;gap:12px;flex-wrap:wrap}
-    label{display:block;font-weight:600;margin:8px 0 6px}
-    input[type="text"],input[type="email"],input[type="tel"],input[type="date"],textarea,select{
-      width:100%;padding:9px;border:1px solid #cfcfcf;border-radius:6px;font:inherit;box-sizing:border-box
-    }
-    textarea{min-height:88px;resize:vertical}
-    .small{width:140px}
-    .checkbox-group,label.inline{font-weight:400;display:inline-flex;align-items:center;gap:6px;margin-right:12px}
-    .submit-btn{
-      display:inline-flex;align-items:center;gap:10px;background:var(--accent);color:#fff;padding:12px 20px;border-radius:8px;border:0;cursor:pointer;font-size:16px
-    }
-    .submit-btn[disabled]{opacity:.6;cursor:not-allowed;background:var(--light-grey)}
-    footer{text-align:center;font-size:12px;color:var(--muted);margin-top:22px;padding-top:12px;border-top:1px solid #eee}
-    .visually-hidden{position:absolute!important;height:1px;width:1px;overflow:hidden;clip:rect(1px,1px,1px,1px);white-space:nowrap}
-    .note{font-size:13px;color:#444;margin:6px 0}
-    #confirmation{display:none;color:green;text-align:center;margin-bottom:12px}
-    .error{color:var(--error);font-size:13px}
-    @media(min-width:700px){.two{flex:1 1 48%}.three{flex:1 1 30%}}
-    @media(max-width:600px){
-      body {padding:0 10px;}
-      .submit-btn {width:100%; justify-content:center;}
-      .checkbox-group label.inline,
-      [role="radiogroup"] label.inline {width:100%; margin-bottom:8px;}
-    }
-    .checkbox-group, [role="radiogroup"] {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 6px;
-    }
-    .checkbox-group label.inline,
-    [role="radiogroup"] label.inline {
-      flex: 1 1 100%;
-      min-width: 120px;
-    }
-    .bold-label strong {font-weight:700;}
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>LivingWell Centre – Client Intake & Consent Form</title>
+<style>
+:root{
+  --accent:#568273;
+  --accent-dark:#46695e;
+  --bg:#f4f4f4;
+  --card:#fff;
+  --muted:#888;
+  --error:#b00020;
+  --light-grey:#ccc;
+}
+html,body{height:100%}
+body {
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+  color: #222;
+  background-color: var(--bg);
+  margin: 0;
+  padding: 0 12px;
+  -webkit-font-smoothing:antialiased;
+}
+.container {
+  max-width: 860px;
+  margin: 30px auto;
+  background-color: var(--card);
+  padding: 28px;
+  border-radius: 10px;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.06);
+}
+.header {text-align:center;margin-bottom:18px}
+.header img{
+  width:100%;
+  height:auto;
+  max-height:180px;
+  object-fit:contain;
+  margin-bottom:8px;
+  display:block;
+}
+h1{color:var(--accent);margin:0 0 6px;font-size:22px}
+p.intro{font-size:15px;line-height:1.6;margin:8px 0 18px}
+fieldset{
+  border:1px solid #e6e6e6;border-radius:8px;margin-bottom:20px;padding:16px;background:#fbfbfb
+}
+legend{font-weight:700;color:var(--accent);padding:0 6px}
+.form-row{display:flex;gap:12px;flex-wrap:wrap}
+label{display:block;font-weight:600;margin:8px 0 6px}
+input[type="text"],input[type="email"],input[type="tel"],input[type="date"],textarea,select{
+  width:100%;padding:9px;border:1px solid #cfcfcf;border-radius:6px;font:inherit;box-sizing:border-box
+}
+textarea{min-height:88px;resize:vertical}
+.small{width:140px}
+.checkbox-group,label.inline{font-weight:400;display:inline-flex;align-items:center;gap:6px;margin-right:12px}
+.submit-btn{
+  display:inline-flex;align-items:center;gap:10px;background:var(--accent);color:#fff;padding:12px 20px;border-radius:8px;border:0;cursor:pointer;font-size:16px
+}
+.submit-btn[disabled]{opacity:.6;cursor:not-allowed;background:var(--light-grey)}
+footer{text-align:center;font-size:12px;color:var(--muted);margin-top:22px;padding-top:12px;border-top:1px solid #eee}
+.visually-hidden{position:absolute!important;height:1px;width:1px;overflow:hidden;clip:rect(1px,1px,1px,1px);white-space:nowrap}
+.note{font-size:13px;color:#444;margin:6px 0}
+#confirmation{display:none;color:green;text-align:center;margin-bottom:12px}
 
-    /* Style for the required fields with red star */
-    .error {
-      color: var(--error);
-      font-size: 13px;
-    }
+/* REQUIRED STAR */
+.required-star {
+  color: red;
+  font-size: 13px;
+}
 
-    .error:before {
-      content: " *";
-      color: red;
-    }
-  </style>
+/* FIELD ERROR MESSAGE */
+.field-error{
+  color: var(--error);
+  font-size: 13px;
+  display:block;
+  margin-top:4px;
+}
+
+/* MODAL STYLES */
+.modal {
+  display:none;
+  position:fixed;
+  z-index:1000;
+  left:0; top:0;
+  width:100%; height:100%;
+  overflow:auto;
+  background-color: rgba(0,0,0,0.6);
+}
+.modal-content {
+  background-color:#fff;
+  margin:50px auto;
+  padding:20px;
+  border-radius:10px;
+  max-width:600px;
+  max-height:80%;
+  overflow-y:auto;
+  position:relative;
+}
+.close-modal {
+  position:absolute;
+  top:10px;
+  right:15px;
+  font-size:24px;
+  font-weight:bold;
+  color:#555;
+  cursor:pointer;
+}
+@media(min-width:700px){.two{flex:1 1 48%}.three{flex:1 1 30%}}
+@media(max-width:600px){
+  body {padding:0 10px;}
+  .submit-btn {width:100%; justify-content:center;}
+  .checkbox-group label.inline,
+  [role="radiogroup"] label.inline {width:100%; margin-bottom:8px;}
+}
+.checkbox-group, [role="radiogroup"] {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+.checkbox-group label.inline,
+[role="radiogroup"] label.inline {
+  flex: 1 1 100%;
+  min-width: 120px;
+}
+.bold-label strong {font-weight:700;}
+</style>
 </head>
 <body>
 <main class="container" role="main">
-  <div class="header">
-    <img src="https://i.imgur.com/xY4N3U3.png" alt="LivingWell header image">
-  </div>
+<div class="header">
+  <img src="https://i.imgur.com/xY4N3U3.png" alt="LivingWell header image">
+</div>
 
-  <p class="intro">
-    LivingWell is a non-profit holistic wellness centre dedicated to providing safe, respectful, and inclusive care.
-    The information you share helps us tailor sessions to your needs and ensure your well-being.
-    Please complete this form before your first appointment.
+<p class="intro">
+  LivingWell is a non-profit holistic wellness centre dedicated to providing safe, respectful, and inclusive care.
+  The information you share helps us tailor sessions to your needs and ensure your well-being.
+  Please complete this form before your first appointment.
+</p>
+
+<p id="confirmation" role="status" aria-live="polite">Thank you! Your form has been successfully submitted.</p>
+
+<form id="clientForm" action="" method="POST" novalidate>
+
+  <!-- 1. Personal Information -->
+  <fieldset>
+    <legend>1. Personal Information</legend>
+    <div class="form-row">
+      <div class="two">
+        <label for="first_name">First name <span class="required-star">*</span></label>
+        <input id="first_name" name="first_name" type="text" required autocomplete="given-name" placeholder="First">
+      </div>
+      <div class="two">
+        <label for="last_name">Last name <span class="required-star">*</span></label>
+        <input id="last_name" name="last_name" type="text" required autocomplete="family-name" placeholder="Last">
+      </div>
+      <div class="small">
+        <label for="dob">Date of birth</label>
+        <input id="dob" name="dob" type="date" max="">
+      </div>
+    </div>
+    <label for="address">Address</label>
+    <input id="address" name="address" type="text">
+    <div class="form-row">
+      <div class="three">
+        <label for="postal_code">Postal code</label>
+        <input id="postal_code" name="postal_code" type="text" pattern="[A-Za-z0-9\s\-]{2,10}">
+      </div>
+      <div class="three">
+        <label for="city">City</label>
+        <input id="city" name="city" type="text">
+      </div>
+      <div class="three">
+        <label for="phone">Phone number</label>
+        <input id="phone" name="phone" type="tel" placeholder="+12 345 678 910">
+      </div>
+    </div>
+    <label for="email">Email address <span class="required-star">*</span></label>
+    <input id="email" name="email" type="email" required placeholder="name@example.com">
+    <label>Preferred contact method for appointments <span class="required-star">*</span></label>
+    <div role="radiogroup">
+      <label class="inline"><input type="radio" name="contact_method" value="Email" required> Email</label>
+      <label class="inline"><input type="radio" name="contact_method" value="Phone"> Phone</label>
+      <label class="inline"><input type="radio" name="contact_method" value="SMS"> SMS</label>
+      <label class="inline"><input type="radio" name="contact_method" value="WhatsApp"> WhatsApp</label>
+    </div>
+  </fieldset>
+
+  <!-- 2. Service Selection -->
+  <fieldset>
+    <legend>2. Service Selection</legend>
+    <div role="radiogroup">
+      <label class="inline"><input type="radio" name="service" value="Localised Chair Massage" required> Localised Chair Massage</label>
+      <label class="inline"><input type="radio" name="service" value="Localised Massage with Oils"> Localised Massage with Oils</label>
+      <label class="inline"><input type="radio" name="service" value="Aromatherapy Massage"> Aromatherapy Massage</label>
+      <label class="inline"><input type="radio" name="service" value="Maderotherapy Massage"> Maderotherapy Massage</label>
+      <label class="inline"><input type="radio" name="service" value="Free 10-minute Quick Relief Massage"> Free 10-minute Quick Relief Massage</label>
+    </div>
+  </fieldset>
+
+  <!-- 3. Medical Conditions -->
+  <fieldset>
+    <legend>3. Medical Conditions</legend>
+    <p class="note">Please indicate any relevant conditions before participating. This information is helpful to alert the therapist about special considerations for a comfortable experience:</p>
+    <div role="group" class="checkbox-group" style="gap:6px;">
+      <label class="inline"><input type="checkbox" name="medical_conditions" value="Varicose veins, circulation issues, or recent inflammation (important for maderotherapy)"> <strong>Varicose veins, circulation issues, or recent inflammation (important for maderotherapy)</strong></label>
+      <label class="inline"><input type="checkbox" name="medical_conditions" value="Sensitivity to strong pressure or cellulite/fibrosis treatment"> <strong>Sensitivity to strong pressure or cellulite/fibrosis treatment</strong></label>
+      <label class="inline"><input type="checkbox" name="medical_conditions" value="Allergies or sensitivities to essential oils or fragrances (aromatherapy)"> <strong>Allergies or sensitivities to essential oils or fragrances (aromatherapy)</strong></label>
+      <label class="inline"><input type="checkbox" name="medical_conditions" value="Respiratory conditions such as asthma triggered by scents"> <strong>Respiratory conditions such as asthma triggered by scents</strong></label>
+      <label class="inline"><input type="checkbox" name="medical_conditions" value="Neck, spine, or mobility limitations (chair massage)"> <strong>Neck, spine, or mobility limitations (chair massage)</strong></label>
+      <label class="inline"><input type="checkbox" name="medical_conditions" value="Skin irritation, open wounds, or bruising in treatment area"> <strong>Skin irritation, open wounds, or bruising in treatment area</strong></label>
+      <label class="inline"><input type="checkbox" id="pregnancy_cb" name="medical_conditions" value="Pregnancy (weeks)"> <strong>Pregnancy (weeks):</strong> <input type="text" id="pregnancy_text" name="pregnancy_weeks" placeholder="12" disabled required></label>
+      <label class="inline"><input type="checkbox" id="other_cb" name="medical_conditions" value="Other medical conditions"> <strong>Other medical conditions:</strong> <input type="text" id="other_text" name="other_conditions" placeholder="Specify" disabled required></label>
+    </div>
+  </fieldset>
+
+  <!-- 4. Consent & Acknowledgement -->
+  <fieldset>
+    <legend>4. Consent & Acknowledgement</legend>
+    <p class="note">
+      Please <a href="#" id="openConsent" style="color:var(--accent); text-decoration:underline;">read the full Consent & Acknowledgement</a> before agreeing.
+    </p>
+    <label class="inline">
+      <input type="checkbox" id="gdpr_consent" name="gdpr_consent" required>
+      I have read and agree to the Consent & Acknowledgement. <span class="error">*</span>
+    </label>
+  </fieldset>
+
+  <!-- 5. Policies & Procedures -->
+  <fieldset>
+    <legend>5. Policies & Procedures</legend>
+    <p class="note">
+      Please <a href="#" id="openPolicies" style="color:var(--accent); text-decoration:underline;">read the full Policies & Procedures</a> before agreeing.
+    </p>
+  </fieldset>
+
+  <!-- 6. Stay Informed! -->
+  <fieldset>
+    <legend>6. Stay Informed!</legend>
+    <p style="font-weight:600;">I agree to receive occasional updates about LivingWell's activities and wellness services.</p>
+    <div role="radiogroup">
+      <label class="inline"><input type="radio" name="marketing" value="Yes"> Yes</label>
+      <label class="inline"><input type="radio" name="marketing" value="No"> No</label>
+    </div>
+    <p style="font-size:13px; margin:4px 0;">*No spam, just relevant information.</p>
+  </fieldset>
+
+  <p class="note">
+    By submitting this form, you agree to LivingWell's terms and conditions.
   </p>
 
-  <p id="confirmation" role="status" aria-live="polite">Thank you! Your form has been successfully submitted.</p>
+  <div style="display:flex;gap:12px;align-items:center">
+    <button type="submit" id="submitBtn" class="submit-btn">Submit</button>
+    <div id="formError" class="error" role="alert" style="display:none"></div>
+  </div>
+</form>
 
-  <form id="clientForm" action="" method="POST" novalidate>
+<footer>
+  LivingWell Centre – Chaussée d'Etterbeek 64, 1040 Bruxelles – contact@livingwell.be – February 2026
+</footer>
 
-    <!-- 1. Personal Information -->
-    <fieldset>
-      <legend>1. Personal Information</legend>
-      <div class="form-row">
-        <div class="two">
-          <label for="first_name">First name <span class="error">*</span></label>
-          <input id="first_name" name="first_name" type="text" required autocomplete="given-name" placeholder="First">
-        </div>
-        <div class="two">
-          <label for="last_name">Last name <span class="error">*</span></label>
-          <input id="last_name" name="last_name" type="text" required autocomplete="family-name" placeholder="Last">
-        </div>
-        <div class="small">
-          <label for="dob">Date of birth <span class="error">*</span></label>
-          <input id="dob" name="dob" type="date" required max="">
-        </div>
-      </div>
+<!-- MODALS -->
+<div id="consentModal" class="modal">
+  <div class="modal-content">
+    <span class="close-modal" data-target="consentModal">&times;</span>
+    <h2>Consent & Acknowledgement</h2>
+    <p>
+      We process your personal data to be able to provide you with our services, for safety while you are in the LivingWell premises and for customer records (e.g. reservation, payment handling, newsletters - if you have given your consent). Your data is not retained for longer than necessary to achieve the ends pursued. It is not shared with third parties, unless it is necessary for the provision of a service or required by law. Requests for access, correction, or deletion can be sent to contact@livingwell.be.
+    </p>
+    <p><strong>Nature of Service:</strong> I understand services are non-medical and complementary.</p>
+  </div>
+</div>
 
-      <label for="address">Address</label>
-      <input id="address" name="address" type="text">
+<div id="policiesModal" class="modal">
+  <div class="modal-content">
+    <span class="close-modal" data-target="policiesModal">&times;</span>
+    <h2>Policies & Procedures</h2>
 
-      <div class="form-row">
-        <div class="three">
-          <label for="postal_code">Postal code</label>
-          <input id="postal_code" name="postal_code" type="text" pattern="[A-Za-z0-9\s\-]{2,10}">
-        </div>
-        <div class="three">
-          <label for="city">City</label>
-          <input id="city" name="city" type="text">
-        </div>
-        <div class="three">
-          <label for="phone">Phone number</label>
-          <input id="phone" name="phone" type="tel" placeholder="+12 345 678 910">
-        </div>
-      </div>
-
-      <label for="email">Email address <span class="error">*</span></label>
-      <input id="email" name="email" type="email" required placeholder="name@example.com">
-
-      <label>Preferred contact method for appointments <span class="error">*</span></label>
-      <div role="radiogroup">
-        <label class="inline"><input type="radio" name="contact_method" value="Email" required> Email</label>
-        <label class="inline"><input type="radio" name="contact_method" value="Phone"> Phone</label>
-        <label class="inline"><input type="radio" name="contact_method" value="SMS"> SMS</label>
-        <label class="inline"><input type="radio" name="contact_method" value="WhatsApp"> WhatsApp</label>
-      </div>
-    </fieldset>
-
-    <!-- 2. Service Selection -->
-    <fieldset>
-      <legend>2. Service Selection</legend>
-      <div role="radiogroup">
-        <label class="inline"><input type="radio" name="service" value="Localised Chair Massage" required> Localised Chair Massage</label>
-        <label class="inline"><input type="radio" name="service" value="Localised Massage with Oils"> Localised Massage with Oils</label>
-        <label class="inline"><input type="radio" name="service" value="Aromatherapy Massage"> Aromatherapy Massage</label>
-        <label class="inline"><input type="radio" name="service" value="Maderotherapy Massage"> Maderotherapy Massage</label>
-        <label class="inline"><input type="radio" name="service" value="Free 10-minute Quick Relief Massage"> Free 10-minute Quick Relief Massage</label>
-      </div>
-    </fieldset>
-
-    <!-- 3. Medical Conditions -->
-    <fieldset>
-      <legend>3. Medical Conditions</legend>
-      <p class="note">Please indicate any relevant conditions before participating. This information is helpful to alert the therapist about special considerations for a comfortable experience:</p>
-      <div role="group" class="checkbox-group" style="gap:6px;">
-        <label class="inline"><input type="checkbox" name="medical_conditions" value="Varicose veins, circulation issues, or recent inflammation (important for maderotherapy)"> <strong>Varicose veins, circulation issues, or recent inflammation (important for maderotherapy)</strong></label>
-        <label class="inline"><input type="checkbox" name="medical_conditions" value="Sensitivity to strong pressure or cellulite/fibrosis treatment"> <strong>Sensitivity to strong pressure or cellulite/fibrosis treatment</strong></label>
-        <label class="inline"><input type="checkbox" name="medical_conditions" value="Allergies or sensitivities to essential oils or fragrances (aromatherapy)"> <strong>Allergies or sensitivities to essential oils or fragrances (aromatherapy)</strong></label>
-        <label class="inline"><input type="checkbox" name="medical_conditions" value="Respiratory conditions such as asthma triggered by scents"> <strong>Respiratory conditions such as asthma triggered by scents</strong></label>
-        <label class="inline"><input type="checkbox" name="medical_conditions" value="Neck, spine, or mobility limitations (chair massage)"> <strong>Neck, spine, or mobility limitations (chair massage)</strong></label>
-        <label class="inline"><input type="checkbox" name="medical_conditions" value="Skin irritation, open wounds, or bruising in treatment area"> <strong>Skin irritation, open wounds, or bruising in treatment area</strong></label>
-        <label class="inline"><input type="checkbox" id="pregnancy_cb" name="medical_conditions" value="Pregnancy (weeks)"> <strong>Pregnancy (weeks):</strong> <input type="text" id="pregnancy_text" name="pregnancy_weeks" placeholder="12" disabled required></label>
-        <label class="inline"><input type="checkbox" id="other_cb" name="medical_conditions" value="Other medical conditions"> <strong>Other medical conditions:</strong> <input type="text" id="other_text" name="other_conditions" placeholder="Specify" disabled required></label>
-      </div>
-    </fieldset>
-
-    <!-- 4. Consent & Acknowledgement -->
-    <fieldset>
-      <legend>4. Consent & Acknowledgement</legend>
-      <p class="note">
-        <strong>Nature of Service:</strong> I understand services are non-medical and complementary.<br>
-        <strong>Privacy & GDPR:</strong> DATA IS NOT SHARED WITH THIRD PARTIES. Data will be stored for up to 5 years after your last appointment for legal and insurance purposes. Requests for access, correction, or deletion can be sent to contact@livingwell.be.<br>
-      </p>
-      <label class="inline">
-        <input type="checkbox" id="gdpr_consent" name="gdpr_consent" required>
-        I consent to the processing of my personal data in accordance with the privacy policy. <span class="error">*</span>
-      </label>
-    </fieldset>
-
-    <!-- 5. Policies & Procedures -->
-    <fieldset>
-      <legend>5. Policies & Procedures</legend>
-      <ol class="note">
-        <li><strong>Purpose of Services:</strong> All services are non-medical.</li>
-        <li><strong>Registration & Identification:</strong> Clients must register upon arrival.</li>
-        <li><strong>Smoking/Vaping:</strong> Strictly prohibited within the premises.</li>
-        <li><strong>Alcohol/Substances:</strong> Consumption of alcohol or substances that may impair judgement is not permitted before or during treatments. We reserve the right to deny access to the centre and to services if the client is under the influence.</li>
-        <li><strong>Health Conditions:</strong> Notify the therapist of any and all health related conditions that are relevant before receiving your massage.</li>
-        <li><strong>Cancellations:</strong> Cancel at least 24 hours in advance. Late cancellations or no shows may incur a fee.</li>
-        <li><strong>Payment:</strong> Payment is due in advance or latest at the time of service as a general rule. Accepted methods include cash and electronic payment.</li>
-        <li><strong>Safety:</strong> Notify the therapist immediately of any discomfort.</li>
-        <li><strong>Governing Law:</strong> This agreement is governed by Belgian law. The courts of the centre have exclusive jurisdiction.</li>
-      </ol>
-    </fieldset>
-
-    <!-- 6. Stay Informed! -->
-    <fieldset>
-      <legend>6. Stay Informed!</legend>
-      <p style="font-weight:600;">I agree to receive occasional updates about LivingWell's activities and wellness services. <span class="error">*</span></p>
-      <div role="radiogroup">
-        <label class="inline"><input type="radio" name="marketing" value="Yes" required> Yes</label>
-        <label class="inline"><input type="radio" name="marketing" value="No"> No</label>
-      </div>
-      <p style="font-size:13px; margin:4px 0;">*No spam, just relevant information.</p>
-    </fieldset>
-
-    <p class="note">
-      By submitting this form, you agree to LivingWell's terms and conditions.
+    <p>
+      The following Policies & Procedures form part of the agreement between the client and LivingWell Centre. They are intended to ensure a safe, respectful, and professional environment for all clients and staff. By booking or receiving services at LivingWell Centre, you acknowledge that you have read, understood, and agree to comply with these terms.
     </p>
 
-    <div style="display:flex;gap:12px;align-items:center">
-      <button type="submit" id="submitBtn" class="submit-btn">Submit</button>
-      <div id="formError" class="error" role="alert" style="display:none"></div>
-    </div>
-  </form>
+    <ol>
+      <li><strong>Purpose of Services:</strong> All services are non-medical.</li>
+      <li><strong>Registration & Identification:</strong> Clients must register upon arrival.</li>
+      <li><strong>Alcohol/Substances:</strong> Consumption of alcohol or substances that may impair judgement is not permitted before or during treatments. We reserve the right to deny access to the centre and to services if the client is under the influence.</li>
+      <li><strong>Health Conditions:</strong> Notify the therapist of any and all health-related conditions that are relevant before receiving your massage.</li>
+      <li><strong>Cancellations:</strong> Cancel at least 24 hours in advance. Late cancellations or no shows may incur a fee.</li>
+      <li><strong>Payment:</strong> Payment is due in advance or latest at the time of service as a general rule. Accepted methods include cash and electronic payment.</li>
+      <li><strong>Safety:</strong> Notify the therapist immediately of any discomfort.</li>
+      <li><strong>Governing Law:</strong> This agreement is governed by Belgian law. Any disputes shall be resolved in the courts competent for the location of LivingWell Centre, Brussels, Belgium.</li>
+    </ol>
 
-  <footer>
-    LivingWell Centre – Chaussée d'Etterbeek 64, 1040 Bruxelles – contact@livingwell.be
-  </footer>
-</main>
+    <p>
+      LivingWell Centre reserves the right to refuse or discontinue services in the event of non-compliance with these policies.
+    </p>
+
+  </div>
+</div>
 
 <script>
 (function(){
@@ -254,57 +311,45 @@
   const otherText = document.getElementById('other_text');
   const gdprConsent = document.getElementById('gdpr_consent');
 
-  // Toggle text fields for pregnancy & other
-  function clearFieldError(field){ const parent=field.parentNode; parent.querySelectorAll('.error').forEach(e=>e.remove());}
-  function showFieldError(field,message){ clearFieldError(field); const span=document.createElement('span'); span.className='error'; span.textContent=message; span.style.display='block'; field.parentNode.appendChild(span);}
-  function clearAllErrors(){form.querySelectorAll('.error').forEach(e=>e.remove()); formError.style.display='none';}
+  function clearFieldError(field){
+    const parent=field.parentNode;
+    parent.querySelectorAll('.field-error').forEach(e=>e.remove());
+  }
+  function showFieldError(field,message){
+    clearFieldError(field);
+    const span=document.createElement('span');
+    span.className='field-error';
+    span.textContent=message;
+    field.parentNode.appendChild(span);
+  }
+  function clearAllErrors(){
+    form.querySelectorAll('.field-error').forEach(e=>e.remove());
+    formError.style.display='none';
+  }
 
   pregnancyCB.addEventListener('change',()=>{pregnancyText.disabled=!pregnancyCB.checked; if(!pregnancyCB.checked) pregnancyText.value=''; clearFieldError(pregnancyText);});
   otherCB.addEventListener('change',()=>{otherText.disabled=!otherCB.checked; if(!otherCB.checked) otherText.value=''; clearFieldError(otherText);});
 
-  // Remove error on typing or selecting
-  ['first_name','last_name','dob','email','pregnancy_text','other_text'].forEach(id=>{
+  ['first_name','last_name','email','pregnancy_text','other_text'].forEach(id=>{
     const field=document.getElementById(id);
     field.addEventListener('input',()=>clearFieldError(field));
   });
-  ['contact_method','service','marketing'].forEach(name=>{
-    const radios=form.querySelectorAll(`input[name="${name}"]`);
-    radios.forEach(r=>r.addEventListener('change',()=>{ radios[0].parentNode.parentNode.querySelectorAll('.error').forEach(e=>e.remove()); }));
-  });
 
   form.addEventListener('submit', function(evt){
-    evt.preventDefault(); clearAllErrors();
+    evt.preventDefault();
+    clearAllErrors();
     let valid=true;
-
-    // Required text fields
-    ['first_name','last_name','dob','email'].forEach(id=>{
+    ['first_name','last_name','email'].forEach(id=>{
       const f=document.getElementById(id);
-      if(!f.value.trim()){ showFieldError(f,'This field is required'); valid=false; }
-    });
-
-    // Radio groups
-    [
-      {name:'contact_method', label:'Preferred contact method'},
-      {name:'service', label:'Service selection'},
-      {name:'marketing', label:'Stay Informed!'}
-    ].forEach(group=>{
-      const radios=form.querySelectorAll(`input[name="${group.name}"]`);
-      if(!Array.from(radios).some(r=>r.checked)){
-        radios[0].parentNode.parentNode.insertAdjacentHTML('beforeend', `<span class="error">Please select ${group.label}</span>`);
+      if(!f.value.trim()){
+        showFieldError(f,'This field is required');
         valid=false;
       }
     });
-
-    // Conditional pregnancy/other fields
-    if(pregnancyCB.checked && !pregnancyText.value.trim()){ showFieldError(pregnancyText,'Please specify weeks'); valid=false; }
-    if(otherCB.checked && !otherText.value.trim()){ showFieldError(otherText,'Please specify condition'); valid=false; }
-
-    // GDPR consent checkbox
     if(!gdprConsent.checked){
       showFieldError(gdprConsent, 'You must consent to the processing of your personal data');
       valid=false;
     }
-
     if(valid){
       submitBtn.setAttribute('disabled','');
       const formData=new FormData(form);
@@ -319,6 +364,19 @@
       });
     }
   });
+
+  function openModal(id){document.getElementById(id).style.display='block';}
+  function closeModal(id){document.getElementById(id).style.display='none';}
+
+  document.getElementById('openConsent').addEventListener('click',function(e){e.preventDefault(); openModal('consentModal');});
+  document.getElementById('openPolicies').addEventListener('click',function(e){e.preventDefault(); openModal('policiesModal');});
+  document.querySelectorAll('.close-modal').forEach(btn=>{
+    btn.addEventListener('click',()=>closeModal(btn.dataset.target));
+  });
+  window.addEventListener('click',function(e){
+    if(e.target.classList.contains('modal')){e.target.style.display='none';}
+  });
+
 })();
 </script>
 </body>
